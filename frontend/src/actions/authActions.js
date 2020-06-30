@@ -1,6 +1,8 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
+
+
 import {
   GET_ERRORS,
   SET_CURRENT_USER,
@@ -34,11 +36,30 @@ export const loginUser = userData => dispatch => {
         // Set token to Auth header
         setAuthToken(token);
 
-        // Decode token to get user data
-        const decoded = jwt_decode(token);
+        console.log(token)
 
-        // Set current user
-        dispatch(setCurrentUser(decoded));
+        axios.get('http://localhost:4000/user/me').then(res => {
+          console.log(res);
+
+          dispatch(setCurrentUser(res.data));
+         
+      
+        } ).catch(err =>{
+          console.log(err.response.data)
+        }
+
+        )
+
+
+
+
+        
+
+        // // Decode token to get user data
+        // const decoded = jwt_decode(token);
+
+        // // Set current user
+        // dispatch(setCurrentUser(decoded));
     })
     .catch(err =>
       dispatch({

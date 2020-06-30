@@ -6,6 +6,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
+import axios from "axios";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 import { Provider } from "react-redux";
@@ -21,11 +22,16 @@ if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   setAuthToken(token);
 
-  // Decode token and get user info and exp
-  const decoded = jwt_decode(token);
+  //get user from server with token 
+  axios.get('http://localhost:4000/user/me').then(res => {
+          console.log(res);
+         
+      
+        } ).catch(err =>{
+          console.log(err.response.data)
+        }
 
-  // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
+    )
 
 }
 

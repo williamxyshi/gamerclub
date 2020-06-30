@@ -21,6 +21,7 @@ render() {
           
                 </p>
               </h4>
+
               <button
                 style={{
                   width: "150px",
@@ -33,6 +34,7 @@ render() {
               >
                 Logout
               </button>
+              
             </div>
           </div>
         </div>

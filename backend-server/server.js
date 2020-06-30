@@ -8,7 +8,11 @@ const user = require("./routes/user");
 var fs = require('fs')
 var https = require('https')
 
+var cors = require('cors')
+
 const app = express();
+
+app.use(cors());
 
 var privateKey  = fs.readFileSync('server.key', 'utf8');
 var certificate = fs.readFileSync('server.cert', 'utf8');
