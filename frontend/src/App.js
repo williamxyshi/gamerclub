@@ -7,6 +7,8 @@ import Login from "./components/auth/Login";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 
+import { setCurrentUser } from "./actions/authActions";
+
 import axios from "axios";
 
 
@@ -28,6 +30,8 @@ if (localStorage.jwtToken) {
   //get user from server with token 
   axios.get('http://localhost:4000/user/me').then(res => {
           console.log(res);
+
+
          
       
         } ).catch(err =>{
