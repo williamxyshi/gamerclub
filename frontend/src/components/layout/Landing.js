@@ -11,11 +11,11 @@ class Landing extends Component {
         <div className="row">
           <div className="col s12 center-align">
             <h4>
-              <b>Create</b> or <b>Join</b> a group of gamers to play games with 
+              <b>Host</b> or <b>Join</b> a club for gamers to play together
             </h4>
 
             <p className="flow-text grey-text text-darken-1">
-              Sync video game playthroughs and discuss with group members
+              participate in discussion over video games
             </p>
 
 
