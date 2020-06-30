@@ -18,7 +18,7 @@ const db = require("./models");
 
 
 db.mongoose
-  .connect(`mongodb://localhost:27017/plantdoctordb`, {
+  .connect(`mongodb+srv://wazord:will@gamerclub.hodzs.mongodb.net/GamerClub?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -42,10 +42,10 @@ app.get("/", (req, res) => {
 
 app.use("/user", user);
 
-https.createServer(
- credentials, app).listen(PORT, (req, res) => {
-  console.log(`Server Started at https://localhost:${PORT}`);
-});
+// https.createServer(
+//  credentials, app).listen(PORT, (req, res) => {
+//   console.log(`Server Started at https://localhost:${PORT}`);
+// });
 
 app.listen(4000, (req, res) => {
   console.log(`Server Started at http://localhost:4000`);

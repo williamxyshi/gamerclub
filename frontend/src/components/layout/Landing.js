@@ -11,14 +11,17 @@ class Landing extends Component {
         <div className="row">
           <div className="col s12 center-align">
             <h4>
-              <b>Build</b> a login/auth app with the Mern stack from
-              scratch
+              <b>Create</b> or <b>Join</b> a group of gamers to play games with 
             </h4>
+
             <p className="flow-text grey-text text-darken-1">
-              Create a (minimal) full-stack app with user authentication via
-              passport and JWTs
+              Sync video game playthroughs and discuss with group members
             </p>
-            <br />
+
+
+            <br/>
+
+
             <div className="col s6">
               <Link
                 to="/register"
