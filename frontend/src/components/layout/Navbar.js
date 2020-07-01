@@ -1,6 +1,15 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 class Navbar extends Component {
+
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+
+      
+    this.props.history.push("/")
+  };
+
   render() {
     return (
       <div className="navbar-fixed">
@@ -18,8 +27,22 @@ class Navbar extends Component {
             </Link>
           </div>
         </nav>
+
+        <button
+                style={{
+                  width: "100px",
+                  borderRadius: "3px",
+                  marginTop: "1rem",
+                  left: "90%"
+                }}
+                onClick={this.onLogoutClick}
+                className="btn btn-small waves-effect waves-light hoverable blue accent-3"
+                >
+
+                Logout
+        </button>
       </div>
     );
   }
 }
-export default Navbar;
+export default withRouter(Navbar);

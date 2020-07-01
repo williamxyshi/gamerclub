@@ -1,6 +1,13 @@
 import React, { Component } from "react";
-import { Link, Router } from "react-router-dom";
+import { Link, Router, withRouter } from "react-router-dom";
 class Landing extends Component {
+
+  componentWillMount(){
+    if(this.props.user != null){
+      this.props.history.push("/home")
+    }
+
+  }
 
 
 
@@ -54,4 +61,4 @@ class Landing extends Component {
 }
 
 
-export default Landing;
+export default withRouter(Landing);
