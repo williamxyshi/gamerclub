@@ -144,7 +144,7 @@ class App extends Component {
               )}/>
 
               <Route exact path="/home" render={(props) => (
-                  <Home {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
+                  <Home /> //{...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
               )}/>
 
             {/* <Switch>

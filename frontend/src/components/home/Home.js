@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Link, Redirect, withRouter } from "react-router-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; 
+import { Carousel } from 'react-responsive-carousel';
+
 var featuredList = [
   {
       gameTitle: "BioShock",
@@ -21,37 +24,31 @@ var featuredList = [
     gameLink: "https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg"
 },
 ]
-
 class Home extends Component {
-render() {
-  let styles = {
 
+	render() {
+		// const { index, direction } = this.state;
 
-    image: {
-
-        height: 375,
-        width: 275,
-        borderRadius: 10,
-    }
-}
-  return (
-        <div style={{ height: "75vh" }} className="container halign-wrapper">
-          
-            <b style ={{ fontSize: "3vh"}}>Featured Games</b>
-
-     
-
-          <ul>
-            {featuredList.map(item => (
-                <img style = {styles.image} src={item.gameLink} />
-          
-  
-            ))}
-
-          </ul>
-
-        </div>
-      );
-  }
+		return (
+            <div style={{ height: "75vh" }} className="container halign-wrapper">
+                    
+                <b style ={{ fontSize: "3vh"}}>Featured Games</b>
+                <Carousel>
+                    <div>
+                        <img src="https://cdn.cnn.com/cnnnext/dam/assets/181205104053-01-turtle-plastic-super-tease.jpg" />
+                        <p className="legend">Legend 1</p>
+                    </div>
+                    <div>
+                        <img src="https://cdn.cnn.com/cnnnext/dam/assets/181205104053-01-turtle-plastic-super-tease.jpg" />
+                        <p className="legend">Legend 2</p>
+                    </div>
+                    <div>
+                        <img src="https://cdn.cnn.com/cnnnext/dam/assets/181205104053-01-turtle-plastic-super-tease.jpg" />
+                        <p className="legend">Legend 3</p>
+                    </div>
+                </Carousel>
+            </div>
+		);
+	}
 }
 export default withRouter(Home);
