@@ -23,7 +23,7 @@ class Navbar extends Component {
               className="col s5 brand-logo center black-text"
             >
               <i className="material-icons">videogame_asset</i>
-              Gamer Club
+              <b>Gamer Club</b>
             </Link>
           </div>
         </nav>
