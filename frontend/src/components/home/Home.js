@@ -6,34 +6,9 @@ import { Link, Redirect, withRouter } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 
 import Carousel from "./Carousel";
+import ClubList from "./ClubList";
 import M from "materialize-css";
 
-var featuredList = [
-  {
-      gameTitle: "BioShock",
-      gameLink: "https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/BioShock_cover.jpg/220px-BioShock_cover.jpg"
-  },
-  {
-      gameTitle: "Witcher 3",
-      gameLink: "https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg"
-  },
-  {
-    gameTitle: "BioShock",
-    gameLink: "https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/BioShock_cover.jpg/220px-BioShock_cover.jpg"
-},
-{
-    gameTitle: "Witcher 3",
-    gameLink: "https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg"
-},
-{
-    gameTitle: "BioShock",
-    gameLink: "https://upload.wikimedia.org/wikipedia/en/thumb/6/6d/BioShock_cover.jpg/220px-BioShock_cover.jpg"
-},
-{
-    gameTitle: "Witcher 3",
-    gameLink: "https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg"
-},
-]
 class Home extends Component {
     componentDidMount() {
         var elems = document.querySelectorAll('.carousel');
@@ -72,11 +47,7 @@ class Home extends Component {
                 <p style ={{ fontSize: "3vh",
                              fontFamily: "monospace"}}>Your Clubs:</p>
 
-            <ul>
-                {featuredList.map(item => (
-                <img src={item.gameLink}/>
-                ))}
-            </ul>
+            <ClubList/>
             </div>
 		);
 	}
