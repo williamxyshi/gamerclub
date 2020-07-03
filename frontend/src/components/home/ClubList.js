@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
+import './ListItem.css';
 
 var featuredList = [
     {
@@ -34,16 +35,57 @@ class ClubList extends Component {
     
   render() {
     var styles = {
+        imageContainer: {
+            margin: 7,
+            display: "inline-block",
+            textAlign: "center",
+     
+        },
+
+
         image: {
-            height: 255,
-            width: "auto"
+            margin: -2,
+            height: 240,
+            width: 180,
+            boxShadow: "1px 3px 1px #000",
+            borderRadius: 10,
+ 
+        },
+        text: {
+            left: "50%",
+            fontFamily: "Courier New",
+            fontSize: "medium",
+ 
         }
     }
 
     return (
-        <ul>
+        <ul style={{
+            position: "absolute",
+            left: "10%",
+        }}>
             {featuredList.map(item => (
-                <img src={item.gameLink}/>
+                <div className="itemContainer" style={styles.imageContainer}>
+
+                    {/* <img src={item.gameLink} style={styles.image} className="image"/>
+                    <div className="overlay">
+                        {/* <div className="text">Hello World</div> */}
+
+                        <div class="content">
+                            <a target="_blank">
+                                <div class="content-overlay"></div>
+                                <img class="content-image" src={item.gameLink}/>
+                                <div class="content-details fadeIn-bottom">
+                                    <a class="waves-effect waves-light btn-small">View Club</a>
+                                </div>
+                            </a>
+                        </div>
+
+                    <b style={styles.text}>Justin's Gamer Club</b>                        
+
+
+                </div>
+
             ))}
         </ul>
     );

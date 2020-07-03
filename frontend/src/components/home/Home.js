@@ -22,7 +22,7 @@ class Home extends Component {
                 <Carousel/>
 
 
-                <div className="col s12 center-align" style={{marginTop: -40}}>
+                <div className="col s12 center-align" style={{marginTop: -10}}>
                     <a class="waves-effect waves-light btn" style={{
                         background: "#000",
                         marginRight: 5, 
@@ -36,27 +36,24 @@ class Home extends Component {
                         fontFamily: "monospace"        
                     }}>Host a Club with this Game</a>
 
-                     <a class="waves-effect waves-light btn" style={{
+                     <Link to="/hostclub" class="waves-effect waves-light btn" style={{
                         background: "#000",
                         marginRight: 5,  
                         marginLeft: 5, 
                         fontFamily: "monospace" 
-                    }}>Host a Club</a>
+                    }}>Host a Club</Link>
                 </div>
 
-                <p style ={{ fontSize: "3vh",
-                             fontFamily: "monospace"}}>Your Clubs:</p>
 
-            <ClubList/>
+                <p style ={{ 
+                    
+                    fontSize: "3.5vh",
+                             fontFamily: "monospace", 
+                             marginBottom: 0}}>Your Clubs:</p>
+
+            <ClubList />
             </div>
 		);
 	}
 }
 export default withRouter(Home);
-
-const styles = {
-    carouselStyle: {
-        height: "100%",
-        overflow: "unset"
-    }
-}

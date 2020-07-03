@@ -20,6 +20,8 @@ import store from "./store";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Home from "./components/home/Home";
 
+import NewClub from "./components/newclub/NewClub";
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -146,6 +148,11 @@ class App extends Component {
               <Route exact path="/home" render={(props) => (
                   <Home /> //{...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
               )}/>
+
+            <Route exact path="/hostclub" render={(props) => (
+                  <NewClub /> //{...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
+              )}/>
+
 
             {/* <Switch>
               <PrivateRoute exact path="/home" user = {this.user} render={(props) => (

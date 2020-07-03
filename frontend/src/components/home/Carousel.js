@@ -26,10 +26,16 @@ class Carousel extends Component {
   }
 
   render() {
+
+    /**
+     * TODO: investigate centering carousel image
+     */
     var styles = {
         image: {
-            height: 255,
+            height: 285,
             width: "auto"
+            // width: 200,
+            // height: "auto"
         }
     }
 
