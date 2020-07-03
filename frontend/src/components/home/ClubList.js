@@ -31,6 +31,15 @@ var featuredList = [
 ]
 
 class ClubList extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.onClickHandler = this.onClickHandler.bind(this);
+      }
+
+    onClickHandler(index){
+        console.log(index)
+    }
 
     
   render() {
@@ -64,7 +73,7 @@ class ClubList extends Component {
             position: "absolute",
             left: "10%",
         }}>
-            {featuredList.map(item => (
+            {featuredList.map((item, index) => (
                 <div className="itemContainer" style={styles.imageContainer}>
 
                     {/* <img src={item.gameLink} style={styles.image} className="image"/>
@@ -76,7 +85,7 @@ class ClubList extends Component {
                                 <div class="content-overlay"></div>
                                 <img class="content-image" src={item.gameLink}/>
                                 <div class="content-details fadeIn-bottom">
-                                    <a class="waves-effect waves-light btn-small">View Club</a>
+                                    <button class="waves-effect waves-light btn-small" onClick={this.onClickHandler.bind(this, index)}>View Club</button>
                                 </div>
                             </a>
                         </div>
