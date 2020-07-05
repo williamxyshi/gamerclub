@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 
 const user = require("./routes/user");
 
+const games = require("./routes/games");
+
 var fs = require('fs')
 var https = require('https')
 
@@ -45,6 +47,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/user", user);
+
+app.use("/games", games);
 
 // https.createServer(
 //  credentials, app).listen(PORT, (req, res) => {
