@@ -20,13 +20,9 @@ router.get("/getgame", async (req, res) => {
 
         const gameName = req.query.gamename;
 
-        const response = await client
-                                // .fields('name,movies,age')
-                                .sort('name')
-                                .search('mario')
-                                .request('/games');
+
         
-        console.log(response.data)
+     
 
 
 
