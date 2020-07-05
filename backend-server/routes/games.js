@@ -11,27 +11,45 @@ const auth = require("./../middleware/auth");
 
 const User = require("../models/user_model");
 
+const igdb = require('igdb-api-node').default;
+
+const client = igdb('18cd0fe5d2781aaa3c13611e304dc2cd');
+
 router.get("/getgame", async (req, res) => {
-    try {
+    // try {
 
-        const gameName = req.gamename;
+        const gameName = req.query.gamename;
 
+        const response = await client
+                                // .fields('name,movies,age')
+                                .sort('name')
+                                .search('mario')
+                                .request('/games');
+        
+        console.log(response.data)
+
+
+
+
+        var url = ""
 
  
         
+        await wiki().page(gameName).then( page => page.mainImage() ).then(res=>{
+            url = res;
+            console.log(res)
+        });
 
 
+        res.json(url)
 
-        res.send({message: "test"})
-
-    } catch (e) {
-      res.send({ message: "Error in Fetching user" });
-    }
+    // } catch (e) {
+    //   res.send({ message: "Error in Fetching user" + e});
+    // }
   });
 
 
 router.get("/test", async (req, res) => {
-    wiki().page('bioshock').then( page => page.mainImage() ).then(console.log);
     try {
   
     
