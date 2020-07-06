@@ -31,8 +31,8 @@ router.get("/getgame", async (req, res) => {
         var responseArr =[]
 
 
-        var maxLength = 4
-        if(RAWGresponse.data.results.length < 4){
+        var maxLength = 3
+        if(RAWGresponse.data.results.length < 3){
             maxLength = RAWGresponse.data.results.length
         } 
 
