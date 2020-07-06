@@ -9,6 +9,9 @@ import M from "materialize-css";
 
 var generator = require('generate-password');
 
+/**
+ * test server results list
+ */
 var featuredList = [
     {
         gameTitle: "BioShock",
@@ -165,8 +168,6 @@ class NewClub extends Component {
         
            
                 </div>
-
-
 
 
 

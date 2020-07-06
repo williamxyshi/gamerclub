@@ -83,6 +83,36 @@ router.get("/getgame", async (req, res) => {
   });
 
 
+router.post("/createclub", async (req, res) => {
+    try {
+
+        const {
+            clubname,
+            clubid,
+            adminemail,
+            playinggame
+        } = req.body;
+
+
+        console.log( clubname + clubid + adminemail + playinggame )
+
+
+
+
+
+
+
+
+  
+    
+      res.send({message: "test"})
+
+    } catch (e) {
+      res.send({ message: "Error in Fetching user" });
+    }
+  });
+
+
 router.get("/test", async (req, res) => {
     try {
   

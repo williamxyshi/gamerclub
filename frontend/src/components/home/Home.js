@@ -23,11 +23,11 @@ class Home extends Component {
 
 
                 <div className="col s12 center-align" style={{marginTop: -10}}>
-                    <a class="waves-effect waves-light btn" style={{
+                    <Link to="/joinclub"class="waves-effect waves-light btn" style={{
                         background: "#000",
                         marginRight: 5, 
                         fontFamily: "monospace" 
-                    }}>Join a Club</a>
+                    }}>Join a Club</Link>
 
                      <a class="waves-effect waves-light btn" style={{
                         background: "#000",

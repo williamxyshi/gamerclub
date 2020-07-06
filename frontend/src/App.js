@@ -20,7 +20,8 @@ import store from "./store";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Home from "./components/home/Home";
 
-import NewClub from "./components/newclub/NewClub";
+import NewClub from "./components/club/NewClub";
+import JoinClub from "./components/club/JoinClub";
 
 
 // Check for token to keep user logged in
@@ -151,6 +152,10 @@ class App extends Component {
 
             <Route exact path="/hostclub" render={(props) => (
                   <NewClub /> //{...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
+              )}/>
+
+            <Route exact path="/joinclub" render={(props) => (
+                  <JoinClub /> 
               )}/>
 
 
