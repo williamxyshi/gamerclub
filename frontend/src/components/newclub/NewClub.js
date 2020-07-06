@@ -9,6 +9,11 @@ import M from "materialize-css";
 var generator = require('generate-password');
 
 class NewClub extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.onSearchChangeHandler = this.onSearchChangeHandler.bind(this);
+      }
 
     onClickHandler(){
         var password = generator.generate({
@@ -17,6 +22,10 @@ class NewClub extends Component {
         });
 
         console.log(password)
+    }
+
+    onSearchChangeHandler(){
+        console.log("search cahnge")
     }
 
 
@@ -31,7 +40,7 @@ class NewClub extends Component {
                     <div class="row">
                         <div class="input-field col s6">
                             <i class="material-icons prefix">search</i>
-                            <input id="icon_prefix" type="text" class="validate"/>
+                            <input id="icon_prefix" type="text" class="validate" onChange={this.onSearchChangeHandler}/>
                             <label for="icon_prefix">what's the first game you will play?</label>
                         </div>
                      </div>
