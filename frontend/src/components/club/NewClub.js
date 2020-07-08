@@ -7,6 +7,7 @@ import axios from "axios";
 
 import M from "materialize-css";
 
+import './joinclub.css';
 var generator = require('generate-password');
 
 /**
@@ -35,12 +36,16 @@ class NewClub extends Component {
 
         this.state = {
             searchString: "",
-            serverResult: []
+            serverResult: [],
+            chosenGame: null
           };
 
         this.timeout =  0;
 
         this.onSearchChangeHandler = this.onSearchChangeHandler.bind(this);
+        this.onClickHandler = this.onClickHandler.bind(this);
+        this.onChooseGameHandler = this.onChooseGameHandler.bind(this);
+
       }
 
     onClickHandler(){
@@ -50,6 +55,31 @@ class NewClub extends Component {
         });
 
         console.log(password)
+
+        axios.post('http://localhost:4000/games/createclub', {
+            
+
+        })
+        
+        .then(res => {
+
+                
+               
+            
+              } ).catch(err =>{
+                console.log(err)
+              });
+
+
+    }
+
+    onChooseGameHandler(e){
+
+        this.setState({
+            chosenGame: this.state.serverResult[e][0]
+        })
+
+
     }
 
     onSearchChangeHandler(e){
@@ -74,7 +104,7 @@ class NewClub extends Component {
                
             
               } ).catch(err =>{
-                console.log(err.response.data)
+                console.log(err)
               });
     
         }, 200);
@@ -108,6 +138,7 @@ class NewClub extends Component {
                 left: "50%",
                 fontFamily: "Courier New",
                 fontSize: "medium",
+                color: "white"
      
             }
         }
@@ -147,12 +178,12 @@ class NewClub extends Component {
                                             <div class="content-overlay"></div>
                                             <img class="content-image" src={item[1]}/>
                                             <div class="content-details fadeIn-bottom">
-                                                {/* <button class="waves-effect waves-light btn-small" onClick={this.onClickHandler.bind(this, index)}>View Club</button> */}
+                                                <button class="waves-effect waves-light btn-small" onClick={this.onChooseGameHandler.bind(this, index)}>choose</button>
                                             </div>
                                         </a>
                                     </div>
 
-                                <b style={styles.text}>Justin's Gamer Club</b>                        
+                            <b style={styles.text}>{item[0]}</b>                        
 
 
                         </div>
@@ -166,10 +197,8 @@ class NewClub extends Component {
                 
                 <div class="row">
         
-           
+                    <b>Your club will play: {this.state.chosenGame}</b>
                 </div>
-
-
 
                      <button class="waves-effect waves-light btn-large" style={{
                         background: "#000",

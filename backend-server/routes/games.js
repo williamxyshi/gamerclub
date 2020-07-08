@@ -96,6 +96,8 @@ router.post("/createclub", async (req, res) => {
 
         console.log( clubname + clubid + adminemail + playinggame )
 
+        
+
 
 
 
