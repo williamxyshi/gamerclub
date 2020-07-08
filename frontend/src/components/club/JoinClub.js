@@ -48,19 +48,33 @@ class JoinClub extends Component {
         }
     
 		return (
-            <div style={{ height: "75vh"}} >
+            <div style={{ height: "75vh"}} className="container halign-wrapper" >
             
                   <div style={{marginTop: 120}}className="col s12 center-align">
                         <h5>
-                            <b style = {styles.text}> to join, enter your club code below </b>
+                            <b style = {styles.text}>enter your club code below</b>
                         </h5>
                     </div>
 
-                    <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input id="icon_prefix" type="text" class="validate"/>
-                    <label for="icon_prefix">First Name</label>
+                    <div class="input-field col s12" style={{ marginLeft: "20%", marginRight: "20%"}}>
+                        <i class="material-icons prefix">confirmation_number</i>
+                        <input id="icon_prefix" type="text" class="validate"/>
+                        <label for="icon_prefix">Club ID</label>
+
+            
                     </div>
+
+                    <div style={{marginTop: 20}}className="col s12 center-align">
+
+                    <button class="waves-effect waves-light btn-large"  style={{
+        
+                        background: "#000",
+                        fontFamily: "monospace"        
+                    }}>join</button>
+                    </div>
+
+
+
 
 
             </div>
