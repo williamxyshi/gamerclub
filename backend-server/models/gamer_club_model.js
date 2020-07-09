@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 const GamerClub = mongoose.Schema({
 
-  name: String,
+  clubname: String,
   id: String,
-  admin: String,
+  adminemail: String,
+  currentgame: String,
   members: [{email: String}],
   discussionposts : [
       {postQuestion: String, postDescription: String, comments: []}

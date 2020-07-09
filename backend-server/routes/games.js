@@ -10,6 +10,7 @@ const router = express.Router();
 const auth = require("./../middleware/auth");
 
 const User = require("../models/user_model");
+const Club = require("../models/gamer_club_model");
 
 const igdb = require('igdb-api-node').default;
 
@@ -88,37 +89,50 @@ router.post("/createclub", async (req, res) => {
 
         const {
             clubname,
-            clubid,
+            id,
             adminemail,
-            playinggame
+            currentgame
         } = req.body;
 
-
-        console.log( clubname + clubid + adminemail + playinggame )
-
-        
+        console.log("here")
 
 
+        console.log( clubname + id + adminemail + currentgame )
+
+        let club = await Club.findOne({
+            id
+        });
+        if (club) {
+            return res.status(400).json({
+                msg: "Club ID Already Exists"
+            });
+        }
 
 
+        club = new Club({
+            clubname,
+            id,
+            adminemail,
+            currentgame
+            
+        })
 
+        console.log(club)
 
+        club.save();
 
-
-  
-    
-      res.send({message: "test"})
+        res.json(club)
 
     } catch (e) {
-      res.send({ message: "Error in Fetching user" });
+      res.send({ message: e });
     }
   });
 
 
 router.get("/test", async (req, res) => {
     try {
-  
-    
+
+
       res.send({message: "test"})
 
     } catch (e) {

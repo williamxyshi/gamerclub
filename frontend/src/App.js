@@ -24,29 +24,7 @@ import NewClub from "./components/club/NewClub";
 import JoinClub from "./components/club/JoinClub";
 
 
-// Check for token to keep user logged in
-if (localStorage.jwtToken) {
 
-  // Set auth token header auth
-  const token = localStorage.jwtToken;
-  setAuthToken(token);
-
-  //get user from server with token 
-  axios.get('http://localhost:4000/user/me').then(res => {
-          console.log(res);
-         
-      
-        } ).catch(err =>{
-          console.log(err.response.data)
-        });
-
-  // // Decode token and get user info and exp
-  // const decoded = jwt_decode(token);
-
-  // // Set user and isAuthenticated
-  // store.dispatch(setCurrentUser(decoded));
-
-}
 
 class App extends Component {
 
@@ -55,6 +33,35 @@ class App extends Component {
     this.state = {
       user: null,
     };
+    
+    this.checkStorage = this.checkStorage.bind(this)
+
+    this.checkStorage()
+  }
+
+  checkStorage(){
+    // Check for token to keep user logged in
+    if (localStorage.jwtToken) {
+
+      // Set auth token header auth
+      const token = localStorage.jwtToken;
+      setAuthToken(token);
+
+      //get user from server with token 
+      axios.get('http://localhost:4000/user/me').then(res => {
+              console.log(res);
+
+              this.setState({
+                user: res.data
+              })
+            
+          
+            } ).catch(err =>{
+              console.log(err.response.data)
+            });
+
+
+    }
   }
 
  
@@ -147,15 +154,15 @@ class App extends Component {
               )}/>
 
               <Route exact path="/home" render={(props) => (
-                  <Home /> //{...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
+                  <Home {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
               )}/>
 
             <Route exact path="/hostclub" render={(props) => (
-                  <NewClub /> //{...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
+                  <NewClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
               )}/>
 
             <Route exact path="/joinclub" render={(props) => (
-                  <JoinClub /> 
+                  <JoinClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
               )}/>
 
 

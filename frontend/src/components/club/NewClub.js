@@ -37,7 +37,10 @@ class NewClub extends Component {
         this.state = {
             searchString: "",
             serverResult: [],
-            chosenGame: null
+            chosenGame: "",
+            clubName: "",
+
+            clubData: null,
           };
 
         this.timeout =  0;
@@ -45,25 +48,49 @@ class NewClub extends Component {
         this.onSearchChangeHandler = this.onSearchChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
         this.onChooseGameHandler = this.onChooseGameHandler.bind(this);
+        this.onClubNameChangeHandler = this.onClubNameChangeHandler.bind(this);
 
+        console.log("user:" + this.props.user)
       }
 
     onClickHandler(){
+
+        var shouldReturn = false
+        if(!this.state.clubName){
+            M.toast({html: 'please enter a club name', classes: 'rounded'})
+            shouldReturn = true
+        }
+        if(!this.state.chosenGame){
+            M.toast({html: 'please choose a game to play', classes: 'rounded'})
+            shouldReturn = true;
+        }
+
+        if(shouldReturn)return;
+
         var password = generator.generate({
             length: 5,
             numbers: true
         });
 
-        console.log(password)
+      
 
-        axios.post('http://localhost:4000/games/createclub', {
-            
+        const clubData = {
+            clubname: this.state.clubName,
+            id: password,
+            adminemail: this.props.user.email,
+            currentgame: this.state.chosenGame
+        }
+        console.log(clubData)
+        
 
-        })
+        axios.post('http://localhost:4000/games/createclub', clubData)
         
         .then(res => {
+            
+                this.state.clubData = res.data;
 
-                
+                console.log(this.state.clubData)
+            
                
             
               } ).catch(err =>{
@@ -80,6 +107,10 @@ class NewClub extends Component {
         })
 
 
+    }
+
+    onClubNameChangeHandler(e){
+        this.state.clubName = e.target.value
     }
 
     onSearchChangeHandler(e){
@@ -146,7 +177,7 @@ class NewClub extends Component {
 		return (
             <div style={{ height: "75vh"}} className="container halign-wrapper">
                     <div class="input-field col s6">
-                        <input id="input_text" type="text" data-length="10"/>
+                        <input id="input_text" type="text" data-length="10" onChange={this.onClubNameChangeHandler}/>
                         <label for="input_text">club name</label>
                     </div>
 

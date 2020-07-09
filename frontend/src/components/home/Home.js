@@ -10,9 +10,14 @@ import ClubList from "./ClubList";
 import M from "materialize-css";
 
 class Home extends Component {
+    constructor(props){
+        super(props);
+    }
+
     componentDidMount() {
         var elems = document.querySelectorAll('.carousel');
         var instances = M.Carousel.init(elems, {duration: 200});
+
     }
 	render() {
 		return (
@@ -51,7 +56,7 @@ class Home extends Component {
                              fontFamily: "monospace", 
                              marginBottom: 0}}>Your Clubs:</p>
 
-            <ClubList />
+            <ClubList/>
             </div>
 		);
 	}
