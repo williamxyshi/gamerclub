@@ -9,6 +9,9 @@ const four = "https://upload.wikimedia.org/wikipedia/en/thumb/0/07/Metro_2033_Ga
 const five = "https://upload.wikimedia.org/wikipedia/en/f/f1/TombRaider2013.jpg";
 const six = "https://upload.wikimedia.org/wikipedia/en/thumb/2/28/Doom_Cover.jpg/220px-Doom_Cover.jpg";
 
+/**
+ * look to dynamically load carousel items from featured list in server.
+ */
 
 class Carousel extends Component {
   componentDidMount() {

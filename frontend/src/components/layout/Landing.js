@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { Link, Router, withRouter } from "react-router-dom";
 class Landing extends Component {
 
+  /**
+   * if user is signed in, just push to home page
+   */
   componentWillMount(){
     if(this.props.user != null){
       this.props.history.push("/home")
     }
 
   }
-
 
 
 

@@ -37,6 +37,12 @@ class ClubList extends Component {
         this.onClickHandler = this.onClickHandler.bind(this);
       }
 
+    
+      /**
+       * 
+       * passing in index, here we should
+       * link to specific club page.
+       */
     onClickHandler(index){
         console.log(index)
     }

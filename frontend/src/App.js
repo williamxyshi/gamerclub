@@ -39,6 +39,9 @@ class App extends Component {
     this.checkStorage()
   }
 
+  /**
+   * checks if user has logged in before 
+   */
   checkStorage(){
     // Check for token to keep user logged in
     if (localStorage.jwtToken) {

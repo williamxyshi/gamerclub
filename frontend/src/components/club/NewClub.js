@@ -53,6 +53,12 @@ class NewClub extends Component {
         console.log("user:" + this.props.user)
       }
 
+      /**
+       * checks fields and submits club data to server,
+       * on success, will return the club back and we should proceed
+       * to confirmation screen
+       */
+
     onClickHandler(){
 
         var shouldReturn = false
@@ -99,6 +105,10 @@ class NewClub extends Component {
 
 
     }
+    /**
+     * 
+     * sets the chosen game, ie. bioshock
+     */
 
     onChooseGameHandler(e){
 
@@ -109,10 +119,18 @@ class NewClub extends Component {
 
     }
 
+    /**
+     * 
+     * setting club name
+     */
     onClubNameChangeHandler(e){
         this.state.clubName = e.target.value
     }
 
+    /**
+     * searching games from server and returning game name and poster image
+     * we search after theres been no keyboard input for 200 ms.
+     */
     onSearchChangeHandler(e){
         console.log(e.target.value)
 
