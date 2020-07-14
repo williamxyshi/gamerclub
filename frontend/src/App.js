@@ -140,7 +140,7 @@ class App extends Component {
   }
 
   onGamerClubUpdate = newClub => {
-    console.log("data:" + newClub)
+    console.log(newClub)
     this.state.gamerClub = newClub
   }
 
@@ -170,7 +170,7 @@ class App extends Component {
               )}/>
 
             <Route exact path="/hostclub" render={(props) => (
-                  <NewClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} onGamerClubUpdate = {this.onGamerClubUpdate} gamerclub = {this.state.gamerClub}/>
+                  <NewClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} onGamerClubUpdate = {this.onGamerClubUpdate} gamerClub = {this.state.gamerClub}/>
               )}/>
 
             <Route exact path="/joinclub" render={(props) => (
@@ -178,7 +178,7 @@ class App extends Component {
               )}/>
 
             <Route exact path="/confirmclub" render={(props) => (
-                  <ConfirmClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerclub = {this.state.gamerClub}/>
+                  <ConfirmClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerClub = {this.state.gamerClub}/>
               )}/>
 
 

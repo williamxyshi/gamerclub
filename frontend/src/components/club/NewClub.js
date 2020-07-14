@@ -95,8 +95,6 @@ class NewClub extends Component {
             
                 this.props.onGamerClubUpdate(res.data);
 
-                console.log("club data" + this.props.gamerClub + res.data)
-
                 this.props.history.push("/confirmclub")
             
                
