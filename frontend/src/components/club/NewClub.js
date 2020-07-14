@@ -93,9 +93,11 @@ class NewClub extends Component {
         
         .then(res => {
             
-                this.state.clubData = res.data;
+                this.props.onGamerClubUpdate(res.data);
 
-                console.log(this.state.clubData)
+                console.log("club data" + this.props.gamerClub + res.data)
+
+                this.props.history.push("/confirmclub")
             
                
             
@@ -132,7 +134,6 @@ class NewClub extends Component {
      * we search after theres been no keyboard input for 200 ms.
      */
     onSearchChangeHandler(e){
-        console.log(e.target.value)
 
         var text = e.target.value
 

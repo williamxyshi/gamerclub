@@ -22,6 +22,8 @@ import Home from "./components/home/Home";
 
 import NewClub from "./components/club/NewClub";
 import JoinClub from "./components/club/JoinClub";
+import ConfirmClub from "./components/club/ConfirmClub";
+
 
 
 
@@ -32,6 +34,8 @@ class App extends Component {
     super();
     this.state = {
       user: null,
+
+      gamerClub: {},
     };
     
     this.checkStorage = this.checkStorage.bind(this)
@@ -135,6 +139,11 @@ class App extends Component {
     console.log("update App")
   }
 
+  onGamerClubUpdate = newClub => {
+    console.log("data:" + newClub)
+    this.state.gamerClub = newClub
+  }
+
 
 
   
@@ -161,11 +170,15 @@ class App extends Component {
               )}/>
 
             <Route exact path="/hostclub" render={(props) => (
-                  <NewClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
+                  <NewClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} onGamerClubUpdate = {this.onGamerClubUpdate} gamerclub = {this.state.gamerClub}/>
               )}/>
 
             <Route exact path="/joinclub" render={(props) => (
                   <JoinClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
+              )}/>
+
+            <Route exact path="/confirmclub" render={(props) => (
+                  <ConfirmClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerclub = {this.state.gamerClub}/>
               )}/>
 
 
