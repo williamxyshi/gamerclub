@@ -23,6 +23,7 @@ import Home from "./components/home/Home";
 import NewClub from "./components/club/NewClub";
 import JoinClub from "./components/club/JoinClub";
 import ConfirmClub from "./components/club/ConfirmClub";
+import ClubPage from "./components/club/page/ClubPage";
 
 
 
@@ -179,6 +180,10 @@ class App extends Component {
 
             <Route exact path="/confirmclub" render={(props) => (
                   <ConfirmClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerClub = {this.state.gamerClub}/>
+              )}/>
+
+            <Route exact path="/clubpage" render={(props) => (
+                  <ClubPage {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerClub = {this.state.gamerClub}/>
               )}/>
 
 
