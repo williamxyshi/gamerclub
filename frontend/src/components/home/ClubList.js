@@ -41,10 +41,11 @@ class ClubList extends Component {
       /**
        * 
        * passing in index, here we should
-       * link to specific club page.
+       * link to specific club page
        */
     onClickHandler(index){
         console.log(index)
+        this.history.push("/clubpage")
     }
 
     
