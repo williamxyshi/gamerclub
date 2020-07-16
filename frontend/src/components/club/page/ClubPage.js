@@ -11,18 +11,13 @@ class ClubPage extends React.Component {
     }
   }
 
-  toggleSidebar = (event) => {
-    let key = `${event.currentTarget.parentNode.id}Open`;
-    this.setState({ [key]: !this.state[key] });
-  }
 
   render() {
-    let leftOpen = this.state.leftOpen ? 'open' : 'closed';
-    let rightOpen = this.state.rightOpen ? 'open' : 'closed';
 
     return (
     
           <div>
+            
 
 
 

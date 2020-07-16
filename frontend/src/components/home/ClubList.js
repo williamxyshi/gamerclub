@@ -45,7 +45,7 @@ class ClubList extends Component {
        */
     onClickHandler(index){
         console.log(index)
-        this.history.push("/clubpage")
+        this.props.history.push("/clubpage")
     }
 
     
