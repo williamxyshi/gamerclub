@@ -13,7 +13,7 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navbar-fixed">
-        <nav className="z-depth-0">
+        <nav style={{height: "8vh"}}>
           <div className="nav-wrapper white">
             <Link
               to="/home"
@@ -41,6 +41,7 @@ class Navbar extends Component {
 
                 Logout
         </button>
+
       </div>
     );
   }

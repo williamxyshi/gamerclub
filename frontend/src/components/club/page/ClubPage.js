@@ -19,32 +19,63 @@ class ClubPage extends React.Component {
 
       var styles = {
         image: {
-            height: 150,
+            height: 230,
             width: "auto",
             borderRadius: 10,
             marginLeft: "auto",
             marginRight: "auto",
+            marginTop: 20,
+            marginBottom: 10,
+            
             display: "block"
-            // width: 200,
-            // height: "auto"
+        
+        },
+        clubName: {
+  
+
+          marginTop: 15,
+          display: "inline-block",
+          textAlign: "center",
+
         }
     }
 
     return (
 
 
-      <div class="row">
+      <div class="row" style={{height:"92vh"}}>
 
-        <div class="col s3" style={{height: "100%", background: "grey"}}>
-          {/* sidebar info */}
+        <div class="col s3" style={{height: "100%", borderRight: "1px solid grey", display: "inline-block",
+                 }}>
+ 
 
 
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/28/Doom_Cover.jpg/220px-Doom_Cover.jpg" style={styles.image}/>
+        
+            <div style={{ fontSize: "2.7vh", fontFamily:"monospace", textAlign: "center"}}>
 
-          <div>
-            <b> Backseat Gamerz</b>
-          </div>
+              <b>Backseat West Gamer Club</b>
 
+            </div>
+
+
+            <div style={{marginTop: 10}}>
+              Please play until: 
+
+                <div style={{borderColor: "#000"}}>
+
+
+                </div>
+            </div>
+
+
+
+
+ 
+            
+           
+
+     
 
 
 

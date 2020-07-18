@@ -151,7 +151,7 @@ class App extends Component {
   render() {
 
     return (
-      <Provider store={store}>
+
         <Router>
           <div className="App">
             <Navbar logoutUser={this.logoutUser}/>
@@ -195,7 +195,6 @@ class App extends Component {
           </div>
         </Router>
 
-      </Provider>
     );
   }
 }
