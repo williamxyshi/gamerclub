@@ -59,8 +59,8 @@ class ClubPage extends React.Component {
             </div>
 
 
-            <div style={{marginTop: 10}}>
-              Please play until: 
+            <div style={{marginTop: 10, fontFamily:"Courier New"}}>
+              <b>Please play until: </b>
 
                 <div style={{borderColor: "#000"}}>
 
