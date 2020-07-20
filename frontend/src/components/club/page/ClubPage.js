@@ -113,7 +113,7 @@ class ClubPage extends React.Component {
 
 
             <div style={{marginTop: 10, fontFamily:"Courier New", marginLeft: 10}}>
-              <b>Please play until: </b>
+              <b>Reach This Checkpoint: </b>
 
                 <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "2px"}}>
 
@@ -121,6 +121,16 @@ class ClubPage extends React.Component {
                 </div>
 
                 <b>By: 2020-09-05</b>
+           
+                <div style={{marginTop: 10, marginBottom: 10}}>
+
+  
+                       <label>
+                          <input type="checkbox" class="filled-in"/>
+                          <span> <b>Have you played this far yet?</b></span>
+                        </label>
+                </div>
+                
             </div>
 
             <ul class="collapsible">
@@ -135,7 +145,7 @@ class ClubPage extends React.Component {
                 <div class="collapsible-body">
                   <span>
                     <b style={{fontFamily: "monospace"}}>Currently Playing:</b> <span style={{fontFamily: "Courier New"}}>bioshock</span> <br/>
-                    <b style={{fontFamily: "monospace"}}>Gamers Reached Deadline:</b> <span style={{fontFamily: "Courier New"}}>2</span> <br/>
+                    <b style={{fontFamily: "monospace"}}>Checkpoints Reached:</b> <span style={{fontFamily: "Courier New"}}>2</span> <br/>
 
                     <b style={{fontFamily: "monospace"}}>Started Playing:</b> <span style={{fontFamily: "Courier New"}}>08-03-2020</span> <br/>
 
@@ -156,6 +166,7 @@ class ClubPage extends React.Component {
                       <ul>
                         {testMembers.map((item, index) => (
                           <div style={{fontFamily:"Courier New", whiteSpace: "nowrap", overflow: "hidden"}}>
+                              ⚬ {/* medium small white dot emoji */}
                               <IsAdmin isAdmin={testMembers[index].isAdmin}/>
                               {testMembers[index].name}
 
