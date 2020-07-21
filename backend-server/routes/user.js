@@ -90,9 +90,6 @@ router.post(
     ],
     async (req, res) => {
 
-
-      console.log("reached here 1" + req)
-
       const errors = validationResult(req);
   
       if (!errors.isEmpty()) {
@@ -100,8 +97,6 @@ router.post(
           errors: errors.array()
         });
       }
-
-      console.log("reached here 2")
   
       const { email, password } = req.body;
       try {

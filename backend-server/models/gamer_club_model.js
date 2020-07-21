@@ -4,20 +4,17 @@ const GamerClub = mongoose.Schema({
 
   clubname: String,
   id: String,
-  dateCreated: String,
+  datecreated: String,
 
 
   adminemail: String,
 
   currentgame: String,
-  startedPlaying: String,
+  startedplaying: String,
 
 
-  members: [{email: String, isAdmin: String, username: String}],
+  members: [{email: String, isadmin: String, username: String}],
 
-  discussionposts : [
-      {postTitle: String, postDescription: String, postType: String, comments: []}
-    ]
    
 });
 
