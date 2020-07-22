@@ -14,6 +14,7 @@ const GamerClub = mongoose.Schema({
 
 
   members: [{email: String, isadmin: String, username: String}],
+  reachedDeadline: [{email: String, username: String}]
 
    
 });
