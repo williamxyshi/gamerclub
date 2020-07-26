@@ -3,6 +3,8 @@ import React from 'react';
 import M from "materialize-css";
 import axios from "axios";
 
+import PostsComponent from './PostsComponent';
+
 
 const testMembers = [
   {
@@ -46,13 +48,12 @@ function IsAdmin(props){
 
 
 
-
-
 class ClubPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       sidebarOpen: true,
+      reachedChecked: false,
     };
       this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
       this.toggleCheckbox = this.toggleCheckbox.bind(this);
@@ -94,9 +95,25 @@ class ClubPage extends React.Component {
 
   toggleCheckbox(){
 
-    console.log("toggle checkbox")
+    this.setState({
+      reachedChecked: true
+    })
 
-  }
+
+    axios.post('http://localhost:4000/games/toggledeadline', {
+        clubid: this.props.gamerClub.club.id
+      })
+      
+      .then(res => {
+              this.props.onGamerClubUpdate(res.data)
+
+
+      
+          } ).catch(err =>{
+          console.log(err)
+          });
+
+      }
 
 
 
@@ -140,7 +157,26 @@ class ClubPage extends React.Component {
       deadlineDate = this.props.gamerClub.club.currentdeadline
     }
 
-    let checked = false
+    this.state.reachedChecked = false;
+
+    //prevents crash
+    if(this.props.gamerClub.club.reachedDeadline){
+
+      for(let i = 0; i < this.props.gamerClub.club.reachedDeadline.length; i++){
+        let user = this.props.gamerClub.club.reachedDeadline[i]
+
+        if(user.email == this.props.user.email){
+          this.state.reachedChecked = true;
+        }
+
+
+      }
+    }
+
+    var membersList = []
+    if(this.props.gamerClub.club.members){
+      membersList = this.props.gamerClub.club.members
+    }
 
     return (
 
@@ -175,7 +211,7 @@ class ClubPage extends React.Component {
 
   
                        <label>
-                          <input type="checkbox" class="filled-in" checked = {checked} onChange={this.toggleCheckbox}/>
+                          <input type="checkbox" class="filled-in" checked = {this.state.reachedChecked} onChange={this.toggleCheckbox}/>
                           <span> <b>Have you played this far yet?</b></span>
                         </label>
                 </div>
@@ -193,10 +229,10 @@ class ClubPage extends React.Component {
                 <div class="collapsible-header"><i class="material-icons">info</i> <span style={{fontFamily:"monospace"}}>Club Details</span></div>
                 <div class="collapsible-body">
                   <span>
-                    <b style={{fontFamily: "monospace"}}>Currently Playing:</b> <span style={{fontFamily: "Courier New"}}>bioshock</span> <br/>
+              <b style={{fontFamily: "monospace"}}>Currently Playing:</b> <span style={{fontFamily: "Courier New"}}>{this.props.gamerClub.club.currentgame}</span> <br/>
                     <b style={{fontFamily: "monospace"}}>Checkpoints Reached:</b> <span style={{fontFamily: "Courier New"}}>2</span> <br/>
 
-                    <b style={{fontFamily: "monospace"}}>Started Playing:</b> <span style={{fontFamily: "Courier New"}}>08-03-2020</span> <br/>
+              <b style={{fontFamily: "monospace"}}>Started Playing:</b> <span style={{fontFamily: "Courier New"}}>{this.props.gamerClub.club.startedplaying}</span> <br/>
 
                   
                   </span>
@@ -213,11 +249,11 @@ class ClubPage extends React.Component {
                 <div class="collapsible-body">
                   <span>
                       <ul>
-                        {testMembers.map((item, index) => (
+                        {membersList.map((item, index) => (
                           <div style={{fontFamily:"Courier New", whiteSpace: "nowrap", overflow: "hidden"}}>
                               ⚬ {/* medium small white dot emoji */}
-                              <IsAdmin isAdmin={testMembers[index].isAdmin}/>
-                              {testMembers[index].name}
+                              <IsAdmin isAdmin={membersList[index].isadmin == "true"}/>
+                              {membersList[index].username}
 
 
                           </div>
@@ -257,24 +293,11 @@ class ClubPage extends React.Component {
 
 
 
-
-
- 
-            
-           
-
-     
-
-
-
-
-
-
         </div>
 
         <div class="col s9">
-          {/* main page info (discussion etc) */}
-         
+          <PostsComponent gamerClub={this.props.gamerClub}  onGamerClubUpdate = {this.props.onGamerClubUpdate}>
+         </PostsComponent>
         </div>
 
       </div>
