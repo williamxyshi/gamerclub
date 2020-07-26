@@ -1,6 +1,8 @@
 import React from 'react'; 
 
 import M from "materialize-css";
+import axios from "axios";
+
 
 const testMembers = [
   {
@@ -31,7 +33,6 @@ function Admin(props){
 }
 
 function IsAdmin(props){
-  console.log("is admin" + props.isAdmin)
   if(props.isAdmin){
     return(
       <Admin />
@@ -51,21 +52,54 @@ class ClubPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sidebarOpen: true
+      sidebarOpen: true,
     };
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
+      this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+      this.toggleCheckbox = this.toggleCheckbox.bind(this);
+
+    }
 
   componentDidMount() {
 
     let collapsible = document.querySelectorAll(".collapsible");
 
     M.Collapsible.init(collapsible, {});
+
+    if(!this.props.gamerClub.club.clubname){
+
+      console.log("no gaemr club")
+      let id = localStorage.getItem( 'clubid' )
+
+      console.log(id)
+
+
+      axios.post('http://localhost:4000/games/getclub', {
+          clubid: id
+      })
+      
+      .then(res => {
+              this.props.onGamerClubUpdate(res.data)
+    
+  
+      
+          } ).catch(err =>{
+          console.log(err)
+          });
+    }
   }
 
   onSetSidebarOpen(open) {
     this.setState({ sidebarOpen: open });
   }
+
+  toggleCheckbox(){
+
+    console.log("toggle checkbox")
+
+  }
+
+
+
 
 
   render() {
@@ -93,6 +127,21 @@ class ClubPage extends React.Component {
         }
     }
 
+
+    let deadlineDescription = "no description provided"
+
+    if(this.props.gamerClub.club.deadlinedescription != "" && this.props.gamerClub.club.deadlinedescription != null){
+      deadlineDescription = this.props.gamerClub.club.deadlinedescription
+    }
+
+    let deadlineDate = "no date provided"
+
+    if(this.props.gamerClub.club.currentdeadline != "" && this.props.gamerClub.club.currentdeadline != null){
+      deadlineDate = this.props.gamerClub.club.currentdeadline
+    }
+
+    let checked = false
+
     return (
 
 
@@ -103,11 +152,11 @@ class ClubPage extends React.Component {
  
  
 
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/28/Doom_Cover.jpg/220px-Doom_Cover.jpg" style={styles.image}/>
+            <img src={this.props.gamerClub.club.gameurl} style={styles.image}/>
         
             <div style={{ fontSize: "2.7vh", fontFamily:"monospace", textAlign: "center"}}>
 
-              <b>Backseat West Gamer Club</b>
+                <b>{this.props.gamerClub.club.clubname}</b>
 
             </div>
 
@@ -117,16 +166,16 @@ class ClubPage extends React.Component {
 
                 <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "2px"}}>
 
-                  the end of the second chapter
+                  {deadlineDescription}
                 </div>
 
-                <b>By: 2020-09-05</b>
+                <b>By: {deadlineDate}</b>
            
                 <div style={{marginTop: 10, marginBottom: 10}}>
 
   
                        <label>
-                          <input type="checkbox" class="filled-in"/>
+                          <input type="checkbox" class="filled-in" checked = {checked} onChange={this.toggleCheckbox}/>
                           <span> <b>Have you played this far yet?</b></span>
                         </label>
                 </div>

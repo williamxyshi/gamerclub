@@ -56,7 +56,7 @@ class Home extends Component {
                              fontFamily: "monospace", 
                              marginBottom: 0}}>Your Clubs:</p>
 
-            <ClubList history = {this.props.history}/>
+            <ClubList history = {this.props.history} onGamerClubUpdate = {this.props.onGamerClubUpdate}/>
             </div>
 		);
 	}

@@ -10,6 +10,8 @@ const GamerClub = mongoose.Schema({
   adminemail: String,
 
   currentgame: String,
+  gameurl: String,
+
   /**
    * date we started playing the game
    */

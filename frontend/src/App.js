@@ -36,12 +36,18 @@ class App extends Component {
     this.state = {
       user: null,
 
-      gamerClub: {},
+      gamerClub: {
+        club: {
+         
+        }
+
+      },
     };
     
     this.checkStorage = this.checkStorage.bind(this)
 
     this.checkStorage()
+
   }
 
   /**
@@ -70,7 +76,10 @@ class App extends Component {
 
 
     }
+
   }
+
+
 
  
 
@@ -142,7 +151,13 @@ class App extends Component {
 
   onGamerClubUpdate = newClub => {
     console.log(newClub)
-    this.state.gamerClub = newClub
+    // this.state.gamerClub = newClub
+
+    this.setState({
+      gamerClub: newClub
+    })
+
+    localStorage.setItem( 'clubid', newClub.club.id );
   }
 
 
@@ -167,7 +182,7 @@ class App extends Component {
               )}/>
 
               <Route exact path="/home" render={(props) => (
-                  <Home {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history}/>
+                  <Home {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} onGamerClubUpdate = {this.onGamerClubUpdate}/>
               )}/>
 
             <Route exact path="/hostclub" render={(props) => (
@@ -183,7 +198,7 @@ class App extends Component {
               )}/>
 
             <Route exact path="/clubpage" render={(props) => (
-                  <ClubPage {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerClub = {this.state.gamerClub}/>
+                  <ClubPage {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerClub = {this.state.gamerClub} onGamerClubUpdate = {this.onGamerClubUpdate}/>
               )}/>
 
 

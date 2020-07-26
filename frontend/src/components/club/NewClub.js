@@ -39,6 +39,7 @@ class NewClub extends Component {
             serverResult: [],
             chosenGame: "",
             clubName: "",
+            posterurl: "",
 
             clubData: null,
           };
@@ -84,6 +85,7 @@ class NewClub extends Component {
             clubname: this.state.clubName,
             id: password,
             adminemail: this.props.user.email,
+            gameurl: this.state.posterurl,
             currentgame: this.state.chosenGame
         }
         console.log(clubData)
@@ -113,7 +115,8 @@ class NewClub extends Component {
     onChooseGameHandler(e){
 
         this.setState({
-            chosenGame: this.state.serverResult[e][0]
+            chosenGame: this.state.serverResult[e][0],
+            posterurl: this.state.serverResult[e][1]
         })
 
 

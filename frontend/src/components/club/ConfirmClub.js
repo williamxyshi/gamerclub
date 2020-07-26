@@ -43,7 +43,7 @@ class Landing extends Component {
                 <div style={{marginTop: 20}}className="col s12 center-align">
                        
                        <h2>
-                            <b style={styles.codeText}> {this.props.gamerClub.id} </b>
+                            <b style={styles.codeText}> {this.props.gamerClub.club.id} </b>
 
                        </h2>
 

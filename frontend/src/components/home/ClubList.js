@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import './ListItem.css';
+import axios from "axios";
+
 
 var featuredList = [
     {
@@ -45,7 +47,25 @@ class ClubList extends Component {
        */
     onClickHandler(index){
         console.log(index)
-        this.props.history.push("/clubpage")
+
+        axios.post('http://localhost:4000/games/getclub', {
+            clubid: "a"
+        })
+        
+        .then(res => {
+
+
+
+                this.props.onGamerClubUpdate(res.data)
+            
+                this.props.history.push("/clubpage")
+
+        
+            } ).catch(err =>{
+            console.log(err)
+            });
+
+
     }
 
     

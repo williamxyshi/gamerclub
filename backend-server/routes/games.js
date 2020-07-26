@@ -374,6 +374,7 @@ router.post("/changegame", auth, async(req,res) => {
         const {
             clubid,
             currentgame,
+            posterurl,
         } = req.body;
 
 
@@ -397,6 +398,8 @@ router.post("/changegame", auth, async(req,res) => {
             currentgame: currentgame,
             currentdeadline: null,
             deadlinedescription: null,
+            gameurl: posterurl,
+
             startedplaying: date,
 
             $push: {playedgames: {
@@ -930,7 +933,8 @@ router.post("/createclub", auth, async (req, res) => {
             clubname,
             id,
             adminemail,
-            currentgame
+            currentgame,
+            gameurl
         } = req.body;
 
         console.log( clubname + id + adminemail + currentgame )
@@ -1021,6 +1025,7 @@ router.post("/createclub", auth, async (req, res) => {
             currentgame,
             startedplaying,
             members,
+            gameurl,
 
 
             currentdeadline: null,
