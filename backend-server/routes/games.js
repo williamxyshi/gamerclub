@@ -24,9 +24,9 @@ const { response } = require("express");
 const client = igdb('18cd0fe5d2781aaa3c13611e304dc2cd');
 
 /**
- * add post
+ * retrieves club and all attached items, posts, comments
  */
-router.post("/addpost", auth, async(req,res) => {
+router.post("/getclub", auth, async(req,res) => {
     try {
 
         const user = await User.findById(req.user.id);
@@ -38,11 +38,11 @@ router.post("/addpost", auth, async(req,res) => {
         }
 
         const {
-            id
+            clubid,
         } = req.body;
 
         let club = await Club.findOne({
-            id
+            id: clubid
         });
 
         if (!club) {
@@ -50,22 +50,580 @@ router.post("/addpost", auth, async(req,res) => {
                 msg: "Invalid Club ID"
             });
         }
-        
-        if(!isInClub){
+
+        let posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
+
+    } catch (e) {
+
+      res.send({ message: "Could Not Create Post"});
+
+    }
+})
+
+
+
+/**
+ * add comment to post
+ */
+router.post("/addcomment", auth, async(req,res) => {
+    try {
+
+        let date_ob = new Date();
+        let day = ("0" + date_ob.getDate()).slice(-2);
+        // current month
+        let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+        // current year
+        let year = date_ob.getFullYear();
+        let date = year + "-" + month + "-" + day
+
+        const user = await User.findById(req.user.id);
+
+        if(!user){
             return res.status(400).json({
-                msg: "User Not In Club"
+                msg: "Invalid User"
+            });
+        }
+
+        const {
+            clubid,
+            postid,
+            commentbody
+        } = req.body;
+
+        let club = await Club.findOne({
+            id: clubid
+        });
+
+        if (!club) {
+            return res.status(400).json({
+                msg: "Invalid Club ID"
+            });
+        }
+
+        let post = await Post.findOne({
+            postid, clubid
+        })
+
+        if (!post) {
+            return res.status(400).json({
+                msg: "Invalid Post ID"
             });
         }
 
 
+        var comments = await Comment.find({
+            clubid, postid
+        })
+
+        let comment = new Comment({
+            commentid: comments.length,
+            commentbody: commentbody,
+            commenteremail: user.email,
+            dateposted: date,
+            postid: postid,
+            clubid: clubid
+
+        })
+
+        await comment.save()
+
+        let posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
 
     
-        
-        res.json(user)
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
 
     } catch (e) {
 
-      res.send({ message: "Could Not Leave Club"});
+      res.send({ message: "Could Not Create Post"});
+
+    }
+})
+
+
+/**
+ * set/unset reached deadline
+ * for specific user
+ */
+router.post("/toggledeadline", auth, async(req,res) => {
+    try {
+
+        const user = await User.findById(req.user.id);
+
+        if(!user){
+            return res.status(400).json({
+                msg: "Invalid User"
+            });
+        }
+
+        const {
+            clubid,
+
+        } = req.body;
+
+        let club = await Club.findOne({
+            id: clubid
+        })
+
+        var reached = false;
+         
+        for(i = 0; i < club.reachedDeadline.length; i++){
+            var member = club.reachedDeadline[i];
+            if(member.email == user.email){
+                reached = true;
+                break;
+            }
+        }
+
+
+       
+
+
+        console.log(reached)
+
+        if(reached == false){
+            club.reachedDeadline.push({
+                email: user.email,
+                username: user.username
+            })
+        } else {
+            function removeuser(value){
+                return value.email != user.email
+            }
+
+            club.reachedDeadline = club.reachedDeadline.filter(removeuser)
+        }
+
+
+        await club.save()
+
+
+ let posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
+
+    } catch (e) {
+
+      res.send({ message: "Could Not Change Reached Deadline"});
+
+    }
+})
+
+/**
+ * change deadline
+ * 
+ */
+router.post("/changedeadline", auth, async(req,res) => {
+    try {
+
+
+        const user = await User.findById(req.user.id);
+
+        if(!user){
+            return res.status(400).json({
+                msg: "Invalid User"
+            });
+        }
+
+        const {
+            clubid,
+            newdeadline,
+            deadlinedescription,
+        } = req.body;
+
+
+        let clubcheck = await Club.findOne({
+            id: clubid
+        })
+
+
+        let club = await Club.findOneAndUpdate({
+            id: clubid
+        }, {
+            currentdeadline: newdeadline,
+            deadlinedescription: deadlinedescription,
+            $set: {reachedDeadline: []}
+        
+        },{
+            new: true
+        })
+
+
+        let posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
+
+    } catch (e) {
+
+      res.send({ message: "Could Not Change Deadline"});
+
+    }
+})
+
+/**
+ * change game
+ * 
+ * changes the currently playing game
+ * probably make a post about it too
+ */
+router.post("/changegame", auth, async(req,res) => {
+    try {
+
+        let date_ob = new Date();
+        let day = ("0" + date_ob.getDate()).slice(-2);
+
+        // current month
+        let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+        // current year
+        let year = date_ob.getFullYear();
+        let date = year + "-" + month + "-" + day
+
+        const user = await User.findById(req.user.id);
+
+        if(!user){
+            return res.status(400).json({
+                msg: "Invalid User"
+            });
+        }
+
+        const {
+            clubid,
+            currentgame,
+        } = req.body;
+
+
+        let clubcheck = await Club.findOne({
+            id: clubid
+        })
+
+        if(clubcheck.currentgame == currentgame){
+            return res.status(400).json({
+                msg: "Please Change to a Different Game"
+            });
+        }
+
+
+        let pastgame = clubcheck.currentgame
+
+
+        let club = await Club.findOneAndUpdate({
+            id: clubid
+        }, {
+            currentgame: currentgame,
+            currentdeadline: null,
+            deadlinedescription: null,
+            startedplaying: date,
+
+            $push: {playedgames: {
+                game: pastgame,
+                datebeat: date
+            }},
+            $set: {reachedDeadline: []}
+
+        },{
+            new: true
+        })
+
+        var posts = await Post.find({
+            clubid
+        })
+        
+
+
+        let post = new Post({
+            postid: posts.length,
+            clubid: clubid,
+            posttitle: "Attention GAMERS. This club is now playing " + currentgame,
+            postdescription: "Enjoy the change in scenery!",
+            posteremail: "a@gmail.com",
+            
+            posttype: "announcement",
+            dateposted: date
+        })
+
+        post.save()
+
+        posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
+
+    } catch (e) {
+
+      res.send({ message: "Could Not Change Game"});
+
+    }
+})
+
+
+/**
+ * edit post
+ * 
+ * we take in new/old copy of the post, and just update everything.
+ */
+router.post("/editpost", auth, async(req,res) => {
+    try {
+
+        const user = await User.findById(req.user.id);
+
+        if(!user){
+            return res.status(400).json({
+                msg: "Invalid User"
+            });
+        }
+
+        const {
+            clubid,
+            postid,
+            postdescription,
+            posttitle,
+            posttype
+        } = req.body;
+
+        let post = await Post.findOneAndUpdate({
+            clubid: clubid,
+            postid: postid
+        }, {
+            postdescription: postdescription,
+            posttitle: posttitle,
+            posttype: posttype
+
+        }, {
+            new: true
+        })
+
+        if(!post){
+            return res.status(400).json({
+                msg: "Could Not Retrieve Post"
+            });
+
+        }
+
+        let posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
+
+    } catch (e) {
+
+      res.send({ message: "Could Not Edit Post"});
+
+    }
+})
+
+
+
+
+/**
+ * add post
+ */
+router.post("/addpost", auth, async(req,res) => {
+    try {
+
+        let date_ob = new Date();
+        let day = ("0" + date_ob.getDate()).slice(-2);
+        // current month
+        let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+        // current year
+        let year = date_ob.getFullYear();
+        let date = year + "-" + month + "-" + day
+
+        const user = await User.findById(req.user.id);
+
+        if(!user){
+            return res.status(400).json({
+                msg: "Invalid User"
+            });
+        }
+
+        const {
+            clubid,
+            posttitle,
+            postdescription,
+            posttype
+        } = req.body;
+
+        let club = await Club.findOne({
+            id: clubid
+        });
+
+        if (!club) {
+            return res.status(400).json({
+                msg: "Invalid Club ID"
+            });
+        }
+
+
+        var posts = await Post.find({
+            clubid: clubid
+        })
+
+
+        let post = new Post({
+            postid: posts.length,
+            clubid: clubid,
+            posttitle: posttitle,
+            postdescription: postdescription,
+            posteremail: user.email,
+            posttype: posttype,
+            dateposted: date
+        })
+        
+        await post.save();
+
+        posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
+
+    } catch (e) {
+
+      res.send({ message: "Could Not Create Post"});
 
     }
 })
@@ -188,8 +746,30 @@ router.post("/leaveclub", auth, async(req,res) => {
         user.save()
 
     
-        
-        res.json(user)
+        let posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
 
     } catch (e) {
 
@@ -277,7 +857,7 @@ router.post("/joinclub", auth, async(req,res) => {
         //make post about new user joining club
         let clubid = id;
 
-        const posts = await Post.find({
+        var posts = await Post.find({
             clubid: id
         })
         
@@ -306,7 +886,30 @@ router.post("/joinclub", auth, async(req,res) => {
 
     
         
-        res.json(club)
+        posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
 
     } catch (e) {
 
@@ -417,14 +1020,41 @@ router.post("/createclub", auth, async (req, res) => {
             adminemail,
             currentgame,
             startedplaying,
-            members
+            members,
+
+
+            currentdeadline: null,
+            deadlinedescription: null
         })
 
         club.save();
 
 
 
-        res.json(club)
+        let posts = await Post.find({
+            clubid
+        })
+
+        let postsBundle = [];
+
+        for(i = 0; i < posts.length; i++){
+            const currentpost = posts[i];
+
+            let postcomments = await Comment.find({
+                clubid, postid: currentpost.postid
+            })
+
+            postsBundle.push({
+                post: currentpost,
+                comments: postcomments
+            })
+        }
+
+    
+        res.json({
+            club: club,
+            postscomments: postsBundle
+        })
 
     } catch (e) {
       res.send({ message: e });

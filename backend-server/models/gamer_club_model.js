@@ -10,7 +10,21 @@ const GamerClub = mongoose.Schema({
   adminemail: String,
 
   currentgame: String,
+  /**
+   * date we started playing the game
+   */
   startedplaying: String,
+
+  /**
+   * Not set on creation, but added later on. 
+   */
+  currentdeadline: String,
+  deadlinedescription: String,
+
+
+  playedgames: [{
+    game: String, datebeat: String
+  }],
 
 
   members: [{email: String, isadmin: String, username: String}],
