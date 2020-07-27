@@ -4,6 +4,9 @@ import M from "materialize-css";
 import axios from "axios";
 
 
+const test = []
+
+
 class PostsComponent extends Component {
     
     constructor(props) {
@@ -21,13 +24,33 @@ class PostsComponent extends Component {
         }
     }
 
+    var postsComments = []
+    if(this.props.gamerClub.postscomments) {
+        postsComments = this.props.gamerClub.postscomments
+    }
+
     return (
-       <div>
+       <ul>
+            {postsComments.map((item, index) => (
+                <div style={{}}>
+
+                    {console.log(postsComments[index])}
+
+                    {postsComments[index].post.posttitle}
 
 
 
 
-       </div>
+                </div>
+                            
+
+            ))}
+
+
+
+
+
+       </ul>
     );
   }
 }
