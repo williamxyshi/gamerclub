@@ -34,25 +34,36 @@ class PostsComponent extends Component {
     return (
        <ul>
             {postsComments.map((item, index) => (
-                <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "1px", marginTop: 10, marginBottom: 5}}>
+                <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "1px", borderRadius: 8,  marginTop: 10, marginBottom: 5, 
+                        paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}>
 
                     {console.log(postsComments[index])}
 
-                    <div style={{fontSize: 18, fontFamily:"monospace"}}>
+                    <div style={{fontSize: 18, fontFamily:"monospace", marginBottom: 10}}>
                         <b>{postsComments[index].post.posttitle}</b>
                     </div>
                 
-                    <div style={{fontSize: 14, fontFamily: "monospace"}}>
+                    <div style={{fontSize: 14, fontFamily: "monospace", marginBottom: 10}}>
 
                         {postsComments[index].post.postdescription}
 
 
                     </div>
 
-                    <Collapsible trigger="Start here">
-                        <p>This is the collapsible content. It can be any element or React component you like.</p>
-                        <p>It can even be another Collapsible component. Check out the next section!</p>
+      
+                    <Collapsible trigger="Show Comments" triggerWhenOpen="Hide Comments" triggerStyle={{fontFamily: "Courier New", fontSize: 13}}>
+                        {postsComments[index].comments.map((item, commentIndex) => (
+                            <div style={{fontFamily: "monospace"}}>
+
+                                {postsComments[index].comments[commentIndex].commentbody}
+
+
+                            </div>
+                        ))}
                     </Collapsible>
+              
+
+
 
 
 
