@@ -31,6 +31,9 @@ class PostsComponent extends Component {
         postsComments = this.props.gamerClub.postscomments
     }
 
+    var openText = "Show Comments"
+    var hideText = "Hide Comments"
+
     return (
        <ul>
             {postsComments.map((item, index) => (
@@ -39,11 +42,21 @@ class PostsComponent extends Component {
 
                     {console.log(postsComments[index])}
 
-                    <div style={{fontSize: 18, fontFamily:"monospace", marginBottom: 10}}>
+                    <div style={{fontSize: 20, fontFamily:"monospace", marginBottom: -5}}>
                         <b>{postsComments[index].post.posttitle}</b>
                     </div>
+
+                    <div style={{marginBottom: 10, fontSize: 10, marginLeft: 0}}>
+                        posted by: {postsComments[index].post.posteremail}
+                    </div>
+
+              
+
+
+
+
                 
-                    <div style={{fontSize: 14, fontFamily: "monospace", marginBottom: 10}}>
+                    <div style={{fontSize: 16, fontFamily: "monospace", marginBottom: 10}}>
 
                         {postsComments[index].post.postdescription}
 
@@ -51,11 +64,19 @@ class PostsComponent extends Component {
                     </div>
 
       
-                    <Collapsible trigger="Show Comments" triggerWhenOpen="Hide Comments" triggerStyle={{fontFamily: "Courier New", fontSize: 13}}>
+                    <Collapsible trigger={
+                        openText
+                        } triggerWhenOpen={hideText} triggerStyle={{fontFamily: "Courier New", fontSize: 13}}>
                         {postsComments[index].comments.map((item, commentIndex) => (
-                            <div style={{fontFamily: "monospace"}}>
+                            <div style={{fontFamily: "Courier New", marginLeft: 15, marginRight: 15, padding: 4, marginTop: 8, marginBottom: 8,
+                                            borderColor: "#808080", borderStyle:"solid", borderWidth: "1px", borderRadius: 8, }}>
 
-                                {postsComments[index].comments[commentIndex].commentbody}
+
+                                <b>{postsComments[index].comments[commentIndex].commentbody}</b>
+
+                                <div style={{marginLeft: 25}}>
+                                    {postsComments[index].comments[commentIndex].commenteremail}
+                                </div>
 
 
                             </div>
