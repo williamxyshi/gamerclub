@@ -35,7 +35,7 @@ class PostsComponent extends Component {
     var hideText = "Hide Comments"
 
     return (
-       <ul>
+       <ul style={{overflowY: "scroll"}}>
             {postsComments.map((item, index) => (
                 <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "1px", borderRadius: 8,  marginTop: 10, marginBottom: 5, 
                         paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}>
@@ -49,12 +49,6 @@ class PostsComponent extends Component {
                     <div style={{marginBottom: 10, fontSize: 10, marginLeft: 0}}>
                         posted by: {postsComments[index].post.posteremail}
                     </div>
-
-              
-
-
-
-
                 
                     <div style={{fontSize: 16, fontFamily: "monospace", marginBottom: 10}}>
 
@@ -62,8 +56,7 @@ class PostsComponent extends Component {
 
 
                     </div>
-
-      
+              
                     <Collapsible trigger={
                         openText
                         } triggerWhenOpen={hideText} triggerStyle={{fontFamily: "Courier New", fontSize: 13}}>
@@ -82,6 +75,13 @@ class PostsComponent extends Component {
                             </div>
                         ))}
                     </Collapsible>
+
+
+            
+                    <div class="input-field inline">
+                            <textarea id="textarea1" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Your Comment</label>
+                        </div>
               
 
 

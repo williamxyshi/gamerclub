@@ -295,8 +295,8 @@ class ClubPage extends React.Component {
 
         </div>
 
-        <div class="col s9">
-          <PostsComponent gamerClub={this.props.gamerClub}  onGamerClubUpdate = {this.props.onGamerClubUpdate}>
+        <div class="col s9" style={{overflowY: "scroll", height: "100%"}} >
+          <PostsComponent gamerClub={this.props.gamerClub}  onGamerClubUpdate = {this.props.onGamerClubUpdate} style={{overflowY: "scroll"}}>
          </PostsComponent>
         </div>
 
