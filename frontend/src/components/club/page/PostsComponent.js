@@ -56,10 +56,21 @@ class PostsComponent extends Component {
 
 
                     </div>
+
+                                
+                    <div class="input-field inline" style={{width: "30%", height: "10%", marginBottom: -10}}>
+                            <textarea id={index} class="materialize-textarea"></textarea>
+                            <label for={index} style={{fontFamily: "monospace", fontSize: 14}}>Your Comment</label>
+                    </div> 
+
+                    <button style={{marginTop: 10}}>post</button>
+            
               
                     <Collapsible trigger={
                         openText
-                        } triggerWhenOpen={hideText} triggerStyle={{fontFamily: "Courier New", fontSize: 13}}>
+                        } triggerWhenOpen={
+                            hideText
+                        } triggerStyle={{fontFamily: "Courier New", fontSize: 13}}>
                         {postsComments[index].comments.map((item, commentIndex) => (
                             <div style={{fontFamily: "Courier New", marginLeft: 15, marginRight: 15, padding: 4, marginTop: 8, marginBottom: 8,
                                             borderColor: "#808080", borderStyle:"solid", borderWidth: "1px", borderRadius: 8, }}>
@@ -76,12 +87,6 @@ class PostsComponent extends Component {
                         ))}
                     </Collapsible>
 
-
-            
-                    <div class="input-field inline">
-                            <textarea id="textarea1" class="materialize-textarea"></textarea>
-                            <label for="textarea1">Your Comment</label>
-                        </div>
               
 
 
