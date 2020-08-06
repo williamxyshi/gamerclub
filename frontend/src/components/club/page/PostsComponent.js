@@ -3,6 +3,8 @@ import M from "materialize-css";
 
 import axios from "axios";
 
+import Popup from "reactjs-popup";
+
 import Collapsible from 'react-collapsible';
 
 
@@ -57,13 +59,21 @@ class PostsComponent extends Component {
 
                     </div>
 
+                    <Popup
+                        trigger={<button className="button"> Write a Comment </button>}
+                        modal
+                        closeOnDocumentClick
+                    >
+                        <span> Modal content </span>
+                    </Popup>
+
                                 
-                    <div class="input-field inline" style={{width: "30%", height: "10%", marginBottom: -10}}>
+                    {/* <div class="input-field inline" style={{width: "30%", height: "10%", marginBottom: -10}}>
                             <textarea id={index} class="materialize-textarea"></textarea>
                             <label for={index} style={{fontFamily: "monospace", fontSize: 14}}>Your Comment</label>
                     </div> 
 
-                    <button style={{marginTop: 10}}>post</button>
+                    <button style={{marginTop: 10}}>post</button> */}
             
               
                     <Collapsible trigger={
