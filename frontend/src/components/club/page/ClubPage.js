@@ -68,7 +68,7 @@ class ClubPage extends React.Component {
 
     if(!this.props.gamerClub.club.clubname){
 
-      console.log("no gaemr club")
+      console.log("no gamerr club")
       let id = localStorage.getItem( 'clubid' )
 
       console.log(id)

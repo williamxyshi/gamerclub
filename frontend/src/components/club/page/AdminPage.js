@@ -37,10 +37,8 @@ class AdminPage extends Component {
             text: {
                 left: "50%",
                 fontFamily: "Courier New"
-    
-     
-            }
 
+            }
         }
     
 		return (

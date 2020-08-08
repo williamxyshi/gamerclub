@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"prettier.endOfLine": "auto",
+		"prettier.trailingComma": "all"
+	}
+}

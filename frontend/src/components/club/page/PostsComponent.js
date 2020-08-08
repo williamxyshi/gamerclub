@@ -8,6 +8,9 @@ import Popup from "reactjs-popup";
 import Collapsible from 'react-collapsible';
 
 
+
+
+
 const test = []
 
 
@@ -15,7 +18,50 @@ class PostsComponent extends Component {
     
     constructor(props) {
         super(props);
+        this.state = {
+            postComment : "",
+            currentPost: null,
+            currentClub: null,
+        }
+
+        this.onCommentChangeHandler = this.onCommentChangeHandler.bind(this)
+        this.onPostHandler = this.onPostHandler.bind(this)
       }
+
+    onPostHandler(){
+
+        if(this.state.postComment == ""){
+            M.toast({html: 'comment cannot be empty', classes: 'rounded'})
+
+            return
+        }
+
+        const postData = {
+            clubid: this.state.currentClub,
+            postid: this.state.currentPost,
+            commentbody: this.state.postComment
+        }
+        console.log(postData)
+
+        axios.post('http://localhost:4000/games/addcomment', postData)
+        
+        .then(res => {
+            
+                this.props.onGamerClubUpdate(res.data);
+            
+               
+            
+              } ).catch(err =>{
+                console.log(err)
+              });
+
+
+    }
+
+
+    onCommentChangeHandler(e){
+        this.state.postComment = e.target.value;
+    }
 
     
   render() {
@@ -42,8 +88,6 @@ class PostsComponent extends Component {
                 <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "1px", borderRadius: 8,  marginTop: 10, marginBottom: 5, 
                         paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}>
 
-                    {console.log(postsComments[index])}
-
                     <div style={{fontSize: 20, fontFamily:"monospace", marginBottom: -5}}>
                         <b>{postsComments[index].post.posttitle}</b>
                     </div>
@@ -64,16 +108,27 @@ class PostsComponent extends Component {
                         modal
                         closeOnDocumentClick
                     >
-                        <span> Modal content </span>
+                        <div class="input-field inline" style={{width: "30%", height: "10%", marginBottom: -10}}>
+                            <input id={index} type="text" data-length="10" onChange={this.onCommentChangeHandler}></input>
+                            <label for={index} style={{fontFamily: "monospace", fontSize: 14}}>Your Comment</label>
+                        </div> 
+
+                        <button style={{marginTop: 10}} onClick={
+                            (event) => {
+
+    
+                                this.state.currentClub = postsComments[index].post.clubid
+                                this.state.currentPost = postsComments[index].post.postid
+
+                                this.onPostHandler()
+
+                            }
+
+                        } value = {index}>post</button>
                     </Popup>
 
                                 
-                    {/* <div class="input-field inline" style={{width: "30%", height: "10%", marginBottom: -10}}>
-                            <textarea id={index} class="materialize-textarea"></textarea>
-                            <label for={index} style={{fontFamily: "monospace", fontSize: 14}}>Your Comment</label>
-                    </div> 
-
-                    <button style={{marginTop: 10}}>post</button> */}
+             
             
               
                     <Collapsible trigger={
