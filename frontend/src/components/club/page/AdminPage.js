@@ -19,6 +19,13 @@ class AdminPage extends Component {
       }
 
 
+      componentDidMount() {
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems, {duration: 200});
+
+    }
+
+
     handleOutput(e){
         console.log("handle output " + e.target.value)
     }
@@ -44,28 +51,44 @@ class AdminPage extends Component {
 		return (
             <div style={{ height: "75vh"}} className="container halign-wrapper" >
             
-                  <div style={{marginTop: 120}}className="col s12 center-align">
+                  <div style={{marginTop: 45}}className="col s12 left-align">
                         <h5>
-                            <b style = {styles.text}>enter your club code below</b>
+                            <b style = {styles.text}>edit club settings</b>
                         </h5>
                     </div>
 
-                    <div class="input-field col s12" style={{ marginLeft: "20%", marginRight: "20%"}}>
-                        <i class="material-icons prefix">confirmation_number</i>
-                        <input id="icon_prefix" type="text" class="validate"/>
-                        <label for="icon_prefix">Club ID</label>
+
+                    <div class="input-field col s6">
+                        <input id="input_text" type="text" data-length="10" onChange={this.onClubNameChangeHandler}/>
+                        <label for="input_text">deadline description</label>
+                    </div>
+
+                    <input type="text" class="datepicker"/>
+
+
+                    <div className="col s12 center-align" style={{marginTop: 10}}>
+         
+
+                        <a class="waves-effect waves-light btn" style={{
+                            background: "#fff",
+                            marginRight: 5,  
+                            marginLeft: 5,     
+                            color: "#000",
+                            fontFamily: "monospace"        
+                        }}>Cancel</a>
+
+
+                        <a class="waves-effect waves-light btn" style={{
+                            background: "#000",
+                            marginRight: 5,  
+                            marginLeft: 5,     
+                            fontFamily: "monospace"        
+                        }}>Save</a>
+                    </div>
+
+
 
             
-                    </div>
-
-                    <div style={{marginTop: 20}}className="col s12 center-align">
-
-                    <button class="waves-effect waves-light btn-large"  style={{
-        
-                        background: "#000",
-                        fontFamily: "monospace"        
-                    }}>join</button>
-                    </div>
 
 
 

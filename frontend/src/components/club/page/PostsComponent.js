@@ -48,6 +48,7 @@ class PostsComponent extends Component {
         .then(res => {
             
                 this.props.onGamerClubUpdate(res.data);
+                M.toast({html: 'comment posted!', classes: 'rounded'})
             
                
             

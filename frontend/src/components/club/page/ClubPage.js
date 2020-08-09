@@ -2,6 +2,8 @@ import React from 'react';
 
 import M from "materialize-css";
 import axios from "axios";
+import { Link, Redirect, withRouter } from "react-router-dom";
+
 
 import PostsComponent from './PostsComponent';
 
@@ -32,6 +34,31 @@ function Admin(props){
   return(
     <b>[Admin] </b>
   )
+}
+
+
+function AdminButton(props){
+  if(props.isAdmin){
+    return(
+      <button class="waves-effect waves-light btn" 
+
+      style={{
+        background: "#000"
+      }}
+      
+      onClick={
+        (event) => {
+
+          props.history.push("/adminpage")
+        }
+
+      }>Manage Club</button>
+    )
+  } else {
+    return(
+      <Blank />
+    )
+  }
 }
 
 function IsAdmin(props){
@@ -178,6 +205,18 @@ class ClubPage extends React.Component {
       membersList = this.props.gamerClub.club.members
     }
 
+    var isUserAdmin = false;
+    for(var i = 0; i < membersList.length; i ++){
+      let member = membersList[i]
+
+      if(member.email == this.props.user.email){
+   
+        isUserAdmin = member.isadmin == "true";
+      }
+    }
+
+
+
     return (
 
 
@@ -277,7 +316,6 @@ class ClubPage extends React.Component {
                 <div class="collapsible-body">
                   
                   <span>
-                    <b style={{fontFamily: "monospace"}}>Total Games Played:</b> <span style={{fontFamily: "Courier New"}}>5</span> <br/>
                     <b style={{fontFamily: "monospace"}}>Date Created:</b> <span style={{fontFamily: "Courier New"}}>08-03-2020</span> <br/>
                     <b style={{fontFamily: "monospace"}}>Number of Posts:</b> <span style={{fontFamily: "Courier New"}}>300</span> <br/>
 
@@ -290,6 +328,8 @@ class ClubPage extends React.Component {
               </li>
             </ul>
 
+
+            <AdminButton isAdmin={isUserAdmin} history = {this.props.history}/>
 
 
 
@@ -307,4 +347,4 @@ class ClubPage extends React.Component {
   }
 }
 
-export default ClubPage;
+export default withRouter(ClubPage);

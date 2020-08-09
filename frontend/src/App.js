@@ -197,7 +197,7 @@ class App extends Component {
             <Route exact path="/confirmclub" render={(props) => (
                   <ConfirmClub {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerClub = {this.state.gamerClub}/>
               )}/>
-
+ 
             <Route exact path="/clubpage" render={(props) => (
                   <ClubPage {...props} logoutUser={this.logoutUser} user = {this.state.user} history = {this.history} gamerClub = {this.state.gamerClub} onGamerClubUpdate = {this.onGamerClubUpdate}/>
               )}/>
