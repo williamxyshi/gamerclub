@@ -32,6 +32,10 @@ class AdminPage extends Component {
             posterurl: "",
 
 
+            postTitle: "",
+            postBody: ""
+
+
 
 
         }
@@ -46,7 +50,60 @@ class AdminPage extends Component {
         this.onChooseGameHandler = this.onChooseGameHandler.bind(this);
 
         this.onSaveGame = this.onSaveGame.bind(this);
+
+
+        this.handlePostBody = this.handlePostBody.bind(this)
+        this.handlePostTitle = this.handlePostTitle.bind(this)
+        this.onSavePost = this.onSavePost.bind(this)
       }
+
+      onSavePost() {
+
+        var canPass = true
+
+        if(this.state.postTitle == ""){
+            canPass = false
+            M.toast({html: 'post title cannot be empty', classes: 'rounded'})
+
+        }
+
+        if(this.state.postBody == ""){
+            canPass = false
+            M.toast({html: 'post body cannot be empty', classes: 'rounded'})
+
+        }
+
+        if(canPass){
+
+            const postData = {
+                clubid: this.state.currentClub,
+                posttitle: this.state.postTitle,
+                postdescription: this.state.postBody,
+                posttype: "discussion"
+            }
+            console.log(postData)
+    
+            axios.post('http://localhost:4000/games/addpost', postData)
+            
+            .then(res => {
+                
+                    this.props.onGamerClubUpdate(res.data);
+                    M.toast({html: 'post added!', classes: 'rounded'})
+                
+                   
+                
+                  } ).catch(err =>{
+                    console.log(err)
+                  });
+    
+
+
+
+
+
+            }
+
+    }
 
 
       onSaveGame() {
@@ -79,7 +136,7 @@ class AdminPage extends Component {
             .then(res => {
                 
                     this.props.onGamerClubUpdate(res.data);
-                    M.toast({html: 'club updated!', classes: 'rounded'})
+                    M.toast({html: 'game changed!', classes: 'rounded'})
                 
                    
                 
@@ -241,6 +298,15 @@ class AdminPage extends Component {
     }
 
 
+    handlePostTitle(e){
+        this.state.postTitle = e.target.value
+    }
+    
+
+
+    handlePostBody(e){
+        this.state.postBody = e.target.value
+    }
 
 	render() {
 
@@ -433,6 +499,17 @@ class AdminPage extends Component {
 
                         </div>
                         <div id="test3" class="col s12">
+
+
+                                    <div class="input-field col s6">
+                                        <b style={{fontFamily: "Courier New"}}>Post Title:</b>
+                                        <input style={{fontFamily:"monospace"}} id="input_text" type="text" onChange={this.handlePostTitle}/>
+                                    </div>
+
+                                    <div class="input-field col s6">
+                                        <b style={{fontFamily: "Courier New"}}>Post Body:</b>
+                                        <input style={{fontFamily:"monospace"}} id="input_text" type="text" onChange={this.handlePostBody}/>
+                                    </div>
                                             
 
 
@@ -468,7 +545,7 @@ class AdminPage extends Component {
                                                                         (event) => {
 
                                                                             this.state.currentClub = this.props.gamerClub.club.id
-                                                                            this.onSaveGame()
+                                                                            this.onSavePost()
                                                                         
                                                                         }
                                                                         }                                                
