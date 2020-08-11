@@ -152,6 +152,7 @@ class ClubPage extends React.Component {
         image: {
             height: 230,
             width: "auto",
+            maxWidth: 300,
             borderRadius: 10,
             marginLeft: "auto",
             marginRight: "auto",
@@ -229,14 +230,14 @@ class ClubPage extends React.Component {
 
             <img src={this.props.gamerClub.club.gameurl} style={styles.image}/>
         
-            <div style={{ fontSize: "2.7vh", fontFamily:"monospace", textAlign: "center"}}>
+            <div style={{ fontSize: "2.7vh", fontFamily:"monospace", textAlign: "center", marginTop: -10}}>
 
                 <b>{this.props.gamerClub.club.clubname}</b>
 
             </div>
 
 
-            <div style={{marginTop: 10, fontFamily:"Courier New", marginLeft: 10}}>
+            <div style={{marginTop: -5, fontFamily:"Courier New", marginLeft: 10}}>
               <b>Reach This Checkpoint: </b>
 
                 <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "2px", padding: 5}}>
