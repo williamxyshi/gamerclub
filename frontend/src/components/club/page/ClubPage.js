@@ -239,7 +239,7 @@ class ClubPage extends React.Component {
             <div style={{marginTop: 10, fontFamily:"Courier New", marginLeft: 10}}>
               <b>Reach This Checkpoint: </b>
 
-                <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "2px"}}>
+                <div style={{borderColor: "#000", borderStyle:"solid", borderWidth: "2px", padding: 5}}>
 
                   {deadlineDescription}
                 </div>
