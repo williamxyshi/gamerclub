@@ -26,6 +26,50 @@ const client = igdb('18cd0fe5d2781aaa3c13611e304dc2cd');
 /**
  * retrieves club and all attached items, posts, comments
  */
+router.post("/getclubsforhome", auth, async(req,res) => {
+    // try {
+
+        const user = await User.findById(req.user.id);
+
+        if(!user){
+            return res.status(400).json({
+                msg: "Invalid User"
+            });
+        }
+
+
+       
+        var clublist = []
+
+
+        for(i = 0; i < user.joinedclubs.length; i++){
+            let clubid = user.joinedclubs[i].clubid
+            let club = await Club.findOne({
+                id: clubid
+            });
+
+            clublist.push({
+                clubname: club.clubname,
+                posterurl: club.gameurl,
+                clubid: club.id
+            })
+        }
+
+        res.json({
+            clublist
+        })
+
+    // } catch (e) {
+
+    //   res.send({ message: "Could Not Retrieve Clubs"});
+
+    // }
+})
+
+
+/**
+ * retrieves club and all attached items, posts, comments
+ */
 router.post("/getclub", auth, async(req,res) => {
     try {
 

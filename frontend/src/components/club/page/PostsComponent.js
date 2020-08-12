@@ -77,7 +77,10 @@ class PostsComponent extends Component {
 
     var postsComments = []
     if(this.props.gamerClub.postscomments) {
-        postsComments = this.props.gamerClub.postscomments
+        /**
+         * this flips it so that it's in chronological order :) 
+         */
+        postsComments = this.props.gamerClub.postscomments.reverse()
     }
 
     var openText = "Show Comments"

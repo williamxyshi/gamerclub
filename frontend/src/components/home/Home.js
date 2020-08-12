@@ -5,6 +5,9 @@ import { logoutUser } from "../../actions/authActions";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 
+import axios from "axios";
+
+
 import Carousel from "./Carousel";
 import ClubList from "./ClubList";
 import M from "materialize-css";
@@ -12,13 +15,52 @@ import M from "materialize-css";
 class Home extends Component {
     constructor(props){
         super(props);
+
+        this.state = {
+            clublist: []
+        }
+
+
+        this.getClubList = this.getClubList.bind(this)
     }
 
     componentDidMount() {
         var elems = document.querySelectorAll('.carousel');
         var instances = M.Carousel.init(elems, {duration: 200});
 
+        this.getClubList()
     }
+
+    getClubList(){
+
+        let postData = {}
+        axios.post('http://localhost:4000/games/getclubsforhome', postData)
+            
+            .then(res => {
+
+                console.log(res.data)
+                
+                    this.setState({
+                        clublist: res.data
+                    })
+                
+                
+                  } ).catch(err =>{
+                    console.log(err)
+                  });
+    
+
+
+
+
+
+            }
+
+
+
+
+
+
 	render() {
 		return (
             <div style={{ height: "75vh"}} className="container halign-wrapper">
@@ -56,7 +98,7 @@ class Home extends Component {
                              fontFamily: "monospace", 
                              marginBottom: 0}}>Your Clubs:</p>
 
-            <ClubList history = {this.props.history} onGamerClubUpdate = {this.props.onGamerClubUpdate}/>
+            <ClubList history = {this.props.history} onGamerClubUpdate = {this.props.onGamerClubUpdate} clublist={this.state.clublist}/>
             </div>
 		);
 	}

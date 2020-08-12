@@ -49,7 +49,7 @@ class ClubList extends Component {
         console.log(index)
 
         axios.post('http://localhost:4000/games/getclub', {
-            clubid: "a"
+            clubid: this.props.clublist.clublist[index].clubid
         })
         
         .then(res => {
@@ -95,12 +95,21 @@ class ClubList extends Component {
         }
     }
 
+
+    var clublist = []
+    if(this.props.clublist.clublist) {
+        /**
+         * this flips it so that it's in chronological order :) 
+         */
+        clublist = this.props.clublist.clublist
+    }
+
     return (
         <ul style={{
             position: "absolute",
             left: "10%",
         }}>
-            {featuredList.map((item, index) => (
+            {clublist.map((item, index) => (
                 <div className="itemContainer" style={styles.imageContainer}>
 
                     {/* <img src={item.gameLink} style={styles.image} className="image"/>
@@ -110,14 +119,14 @@ class ClubList extends Component {
                         <div class="content">
                             <a target="_blank">
                                 <div class="content-overlay"></div>
-                                <img class="content-image" src={item.gameLink}/>
+                                <img class="content-image" src={item.posterurl}/>
                                 <div class="content-details fadeIn-bottom">
                                     <button class="waves-effect waves-light btn-small" onClick={this.onClickHandler.bind(this, index)}>View Club</button>
                                 </div>
                             </a>
                         </div>
 
-                    <b style={styles.text}>Justin's Gamer Club</b>                        
+                    <b style={styles.text}>{item.clubname}</b>                        
 
 
                 </div>
