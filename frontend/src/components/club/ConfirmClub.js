@@ -4,7 +4,21 @@ class Landing extends Component {
 
     constructor(props) {
         super(props);
+
+
+
+        this.onViewClub = this.onViewClub.bind(this)
+      }
+
+
+
+
+      onViewClub(){
+
         console.log(this.props.gamerClub)
+
+        this.props.history.push("/clubpage")
+
       }
 
 
@@ -59,11 +73,16 @@ class Landing extends Component {
                         marginRight: 10       
                     }}>Back to Home</Link> 
 
-                    <button class="waves-effect waves-light btn-large"  style={{
+                    <button class="waves-effect waves-light btn-large"  
+
+                    onClick={this.onViewClub}
+                    
+                    
+                    style={{
                             
                             background: "#000",
                             fontFamily: "monospace" ,     
-                            marginLeft: 10  
+                            marginLeft: 10 
                         }}>view club</button> 
 
                 

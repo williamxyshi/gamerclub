@@ -54,8 +54,6 @@ class ClubList extends Component {
         
         .then(res => {
 
-
-
                 this.props.onGamerClubUpdate(res.data)
             
                 this.props.history.push("/clubpage")

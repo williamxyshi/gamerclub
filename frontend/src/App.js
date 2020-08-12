@@ -134,6 +134,8 @@ class App extends Component {
 
     // Remove token from local storage
     localStorage.removeItem("jwtToken");
+    localStorage.removeItem("clubid");
+
     // Remove auth header for future requests
     setAuthToken(false);
     

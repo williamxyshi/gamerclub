@@ -27,7 +27,7 @@ const client = igdb('18cd0fe5d2781aaa3c13611e304dc2cd');
  * retrieves club and all attached items, posts, comments
  */
 router.post("/getclubsforhome", auth, async(req,res) => {
-    // try {
+    try {
 
         const user = await User.findById(req.user.id);
 
@@ -48,22 +48,26 @@ router.post("/getclubsforhome", auth, async(req,res) => {
                 id: clubid
             });
 
-            clublist.push({
-                clubname: club.clubname,
-                posterurl: club.gameurl,
-                clubid: club.id
-            })
+            if(club){
+                clublist.push({
+                    clubname: club.clubname,
+                    posterurl: club.gameurl,
+                    clubid: club.id
+                })
+            }
+
+           
         }
 
         res.json({
             clublist
         })
 
-    // } catch (e) {
+    } catch (e) {
 
-    //   res.send({ message: "Could Not Retrieve Clubs"});
+      res.send({ message: "Could Not Retrieve Clubs"});
 
-    // }
+    }
 })
 
 
@@ -1080,7 +1084,7 @@ router.post("/createclub", auth, async (req, res) => {
             dateposted
         })
 
-        post.save()
+        await post.save()
 
 
         club = new Club({
@@ -1098,7 +1102,7 @@ router.post("/createclub", auth, async (req, res) => {
             deadlinedescription: null
         })
 
-        club.save();
+        await club.save();
 
 
         let joinedclub = {

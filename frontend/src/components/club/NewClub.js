@@ -71,6 +71,10 @@ class NewClub extends Component {
             M.toast({html: 'please choose a game to play', classes: 'rounded'})
             shouldReturn = true;
         }
+        if(this.state.gameurl = "" && !shouldReturn){
+            M.toast({html: 'please try again', classes: 'rounded'})
+            shouldReturn = true;
+        }
 
         if(shouldReturn)return;
 
