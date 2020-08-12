@@ -67,6 +67,7 @@ router.post("/getclubsforhome", auth, async(req,res) => {
 })
 
 
+
 /**
  * retrieves club and all attached items, posts, comments
  */
@@ -227,6 +228,7 @@ router.post("/addcomment", auth, async(req,res) => {
 })
 
 
+
 /**
  * set/unset reached deadline
  * for specific user
@@ -316,6 +318,8 @@ router.post("/toggledeadline", auth, async(req,res) => {
     }
 })
 
+
+
 /**
  * change deadline
  * 
@@ -387,6 +391,8 @@ router.post("/changedeadline", auth, async(req,res) => {
 
     }
 })
+
+
 
 /**
  * change game
@@ -508,6 +514,7 @@ router.post("/changegame", auth, async(req,res) => {
 })
 
 
+
 /**
  * edit post
  * 
@@ -582,7 +589,6 @@ router.post("/editpost", auth, async(req,res) => {
 
     }
 })
-
 
 
 
@@ -675,6 +681,8 @@ router.post("/addpost", auth, async(req,res) => {
     }
 })
 
+
+
 /**
  * get game endpoint api 
  * 
@@ -711,6 +719,8 @@ router.get("/getgame", async (req, res) => {
       res.send({ message: "Game Could Not Be Retrieved"});
     }
   });
+
+
 
 /**
  * leave club
@@ -824,6 +834,8 @@ router.post("/leaveclub", auth, async(req,res) => {
 
     }
 })
+
+
 
 /**
  * join club with members
@@ -965,6 +977,8 @@ router.post("/joinclub", auth, async(req,res) => {
     }
 })
 
+
+
 /**
  * inialize club api endpoint
  * 
@@ -972,6 +986,14 @@ router.post("/joinclub", auth, async(req,res) => {
  */
 router.post("/createclub", auth, async (req, res) => {
     try {
+
+        const user = await User.findById(req.user.id);
+
+        if(!user){
+            return res.status(400).json({
+                msg: "Invalid User"
+            });
+        }
 
         const {
             clubname,
@@ -1045,7 +1067,7 @@ router.post("/createclub", auth, async (req, res) => {
         /**
          * CREATE a company account with the right credentials
          */
-        let posteremail = "a@gmail.com"
+        let posteremail = clubname
 
         post = new Post({
             postid,
@@ -1079,6 +1101,17 @@ router.post("/createclub", auth, async (req, res) => {
         club.save();
 
 
+        let joinedclub = {
+            clubid: id
+        }
+
+
+           //add club to users club list
+        User.findOneAndUpdate({email: user.email}, {$push: {joinedclubs: joinedclub}},{new: true}, (err, result) => {
+            console.log(err, result);
+          })
+
+
 
         let posts = await Post.find({
             clubid
@@ -1109,6 +1142,7 @@ router.post("/createclub", auth, async (req, res) => {
       res.send({ message: e });
     }
   });
+
 
 
 router.get("/test", async (req, res) => {
