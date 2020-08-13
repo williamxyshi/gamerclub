@@ -477,7 +477,7 @@ router.post("/changegame", auth, async(req,res) => {
             clubid: clubid,
             posttitle: "Attention GAMERS. This club is now playing " + currentgame,
             postdescription: "Enjoy the change in scenery!",
-            posteremail: "a@gmail.com",
+            posteremail: club.clubname,
             
             posttype: "announcement",
             dateposted: date
@@ -931,7 +931,7 @@ router.post("/joinclub", auth, async(req,res) => {
         let posttype = "announcement";
         let dateposted = date;
 
-        let posteremail = "a@gmail.com"
+        let posteremail = club.clubname
 
         let post = new Post({
             postid,

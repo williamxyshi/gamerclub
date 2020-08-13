@@ -17,14 +17,53 @@ class JoinClub extends Component {
     constructor(props) {
         super(props);
 
-        this.handleOutput = this.handleOutput.bind(this)
+        this.state = {
+            clubid: ""
+        }
 
-    
+        this.handleOutput = this.handleOutput.bind(this)
+        this.handleJoinClub = this.handleJoinClub.bind(this)
       }
 
 
     handleOutput(e){
-        console.log("handle output " + e.target.value)
+        this.state.clubid = e.target.value
+    }
+
+
+    handleJoinClub(){
+
+        var shouldReturn = false
+        if(this.state.clubid = ""){
+            M.toast({html: 'please enter a club ID', classes: 'rounded'})
+            shouldReturn = true
+        }
+        if(shouldReturn)return;
+
+
+        const postdata = {
+            id: this.state.clubid
+        }
+        
+
+        axios.post('http://localhost:4000/games/joinclub', postdata)
+        
+        .then(res => {
+
+                console.log(res.data)
+
+            
+                // this.props.onGamerClubUpdate(res.data);
+
+                // this.props.history.push("/home")
+            
+               
+            
+              } ).catch(err =>{
+                console.log(err)
+              });
+
+
     }
 
 
@@ -58,7 +97,7 @@ class JoinClub extends Component {
 
                     <div class="input-field col s12" style={{ marginLeft: "20%", marginRight: "20%"}}>
                         <i class="material-icons prefix">confirmation_number</i>
-                        <input id="icon_prefix" type="text" class="validate"/>
+                        <input id="icon_prefix" type="text" class="validate" onChange={this.handleOutput}/>
                         <label for="icon_prefix">Club ID</label>
 
             
@@ -70,7 +109,11 @@ class JoinClub extends Component {
         
                         background: "#000",
                         fontFamily: "monospace"        
-                    }}>join</button>
+                    }}
+                    
+                    onClick = {this.handleJoinClub}
+                    
+                    >join</button>
                     </div>
 
 
