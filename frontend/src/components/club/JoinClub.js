@@ -28,17 +28,21 @@ class JoinClub extends Component {
 
     handleOutput(e){
         this.state.clubid = e.target.value
+
+        console.log(this.state.clubid)
     }
 
 
     handleJoinClub(){
 
         var shouldReturn = false
-        if(this.state.clubid = ""){
+        if(this.state.clubid == ""){
             M.toast({html: 'please enter a club ID', classes: 'rounded'})
             shouldReturn = true
         }
         if(shouldReturn)return;
+
+        console.log(this.state.clubid)
 
 
         const postdata = {
@@ -59,8 +63,23 @@ class JoinClub extends Component {
             
                
             
-              } ).catch(err =>{
-                console.log(err)
+              } ).catch(error =>{
+                if (error.response) {
+                    // Request made and server responded
+                    console.log(error.response.data);
+
+                    if(error.response.data.msg){
+                        let text = String(error.response.data.msg)
+                        M.toast({html: text, classes: 'rounded'})
+                    }
+    
+                  } else if (error.request) {
+                    // The request was made but no response was received
+                    console.log(error.request);
+                  } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                  }
               });
 
 
