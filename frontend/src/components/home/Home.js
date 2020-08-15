@@ -76,12 +76,12 @@ class Home extends Component {
                         fontFamily: "monospace" 
                     }}>Join a Club</Link>
 
-                     <a class="waves-effect waves-light btn" style={{
+                     <p class="waves-effect waves-light btn disabled" style={{
                         background: "#000",
                         marginRight: 5,  
                         marginLeft: 5,     
                         fontFamily: "monospace"        
-                    }}>Host a Club with this Game</a>
+                    }}>Currently Most Played Games</p>
 
                      <Link to="/hostclub" class="waves-effect waves-light btn" style={{
                         background: "#000",
