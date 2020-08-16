@@ -102,6 +102,16 @@ class ClubList extends Component {
         clublist = this.props.clublist.clublist
     }
 
+    if(clublist.length == 0){
+        return(
+            <div style={{fontFamily: "Courier New"}}>
+
+                Join a club for it to appear here
+            </div>
+
+        )
+    }
+
     return (
         <ul style={{
             position: "absolute",

@@ -14,14 +14,20 @@ const Club = require("../models/gamer_club_model");
 const Post = require("../models/post_model");
 const Comment = require("../models/comment_model");
 
-
-
 const igdb = require('igdb-api-node').default;
+
+let google = require('google-parser');
 
 const axios = require('axios');
 const { response } = require("express");
 
+const GoogleImages = require('google-images');
+ 
+const imagesClient = new GoogleImages('000521564246615104830:lana7bf1p6c', 'AIzaSyBtFZT6YAFfjjQDHxta_HYxDZ5EYTs9obw');
+
 const client = igdb('18cd0fe5d2781aaa3c13611e304dc2cd');
+
+
 
 /**
  * retrieves club and all attached items, posts, comments
@@ -705,14 +711,40 @@ router.get("/getgame", async (req, res) => {
             var responsegamename = RAWGresponse.data.results[i].name
             console.log(responsegamename)
             var url = ""
-            try{
-                await wiki().page(responsegamename).then( page => page.mainImage() ).then(res=>{
-                    url = res;
-                    console.log(res)
-                });
-            } catch(e){
-                console.log("error retriving image" + e)
-            }
+                try{
+
+                    await imagesClient.search(responsegamename + " video game poster")
+                        .then(images => {
+
+                            url = images[0].url
+                            /*
+                            [{
+                                "url": "http://steveangello.com/boss.jpg",
+                                "type": "image/jpeg",
+                                "width": 1024,
+                                "height": 768,
+                                "size": 102451,
+                                "thumbnail": {
+                                    "url": "http://steveangello.com/thumbnail.jpg",
+                                    "width": 512,
+                                    "height": 512
+                                }
+                            }]
+                            */
+                        });
+
+               
+
+                
+
+
+                    // await wiki().page(responsegamename).then( page => page.mainImage() ).then(res=>{
+                    //     url = res;
+                    //     console.log(res)
+                    // });
+                } catch(e){
+                    console.log("error retriving image" + e)
+                }
             responseArr.push([responsegamename, url]
             );  
         }

@@ -33,7 +33,8 @@ class Navbar extends Component {
                   width: "100px",
                   borderRadius: "3px",
                   marginTop: "1rem",
-                  left: "90%"
+                  left: "90%",
+                  background: "#000",
                 }}
                 onClick={this.onLogoutClick}
                 className="btn btn-small waves-effect waves-light hoverable blue accent-3"

@@ -81,7 +81,7 @@ class Home extends Component {
                         marginRight: 5,  
                         marginLeft: 5,     
                         fontFamily: "monospace"        
-                    }}>Currently Most Played Games</p>
+                    }}>Currently Most Popular Games</p>
 
                      <Link to="/hostclub" class="waves-effect waves-light btn" style={{
                         background: "#000",
