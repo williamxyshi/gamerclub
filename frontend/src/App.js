@@ -172,7 +172,7 @@ class App extends Component {
 
         <Router>
           <div className="App">
-            <Navbar logoutUser={this.logoutUser}/>
+            <Navbar logoutUser={this.logoutUser} user = {this.state.user}/>
             <Route exact path="/" render={(props) => (
                   <Landing {...props} registerUser={this.registerUser} user = {this.state.user}/>
               )}/>
