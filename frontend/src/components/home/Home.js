@@ -37,8 +37,6 @@ class Home extends Component {
         axios.post('http://localhost:4000/games/getclubsforhome', postData)
             
             .then(res => {
-
-                console.log(res.data)
                 
                     this.setState({
                         clublist: res.data

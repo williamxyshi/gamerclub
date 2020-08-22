@@ -187,8 +187,13 @@ class ClubPage extends React.Component {
 
     this.state.reachedChecked = false;
 
+    let numReached = 0
+    let totalNumMembers = 0 
+
     //prevents crash
     if(this.props.gamerClub.club.reachedDeadline){
+
+      numReached = this.props.gamerClub.club.reachedDeadline.length
 
       for(let i = 0; i < this.props.gamerClub.club.reachedDeadline.length; i++){
         let user = this.props.gamerClub.club.reachedDeadline[i]
@@ -203,6 +208,7 @@ class ClubPage extends React.Component {
 
     var membersList = []
     if(this.props.gamerClub.club.members){
+      totalNumMembers = this.props.gamerClub.club.members.length
       membersList = this.props.gamerClub.club.members
     }
 
@@ -223,7 +229,7 @@ class ClubPage extends React.Component {
 
       <div class="row" style={{height:"92vh"}}>
 
-        <div class="col s3" style={{height: "100%", borderRight: "1px solid grey", display: "inline-block",
+        <div class="col s3" style={{height: "100%", borderRight: "1px solid grey", overflowY: "scroll",display: "inline-block",
                  }}>
  
  
@@ -270,9 +276,10 @@ class ClubPage extends React.Component {
                 <div class="collapsible-body">
                   <span>
               <b style={{fontFamily: "monospace"}}>Currently Playing:</b> <span style={{fontFamily: "Courier New"}}>{this.props.gamerClub.club.currentgame}</span> <br/>
-                    <b style={{fontFamily: "monospace"}}>Checkpoints Reached:</b> <span style={{fontFamily: "Courier New"}}>2</span> <br/>
+                    <b style={{fontFamily: "monospace"}}>Checkpoints Reached:</b> <span style={{fontFamily: "Courier New"}}>{numReached}/{totalNumMembers}</span> <br/>
 
               <b style={{fontFamily: "monospace"}}>Started Playing:</b> <span style={{fontFamily: "Courier New"}}>{this.props.gamerClub.club.startedplaying}</span> <br/>
+              <b style={{fontFamily: "monospace"}}>Club Join Code:</b> <span style={{fontFamily: "Courier New"}}>{this.props.gamerClub.club.id}</span> <br/>
 
                   
                   </span>

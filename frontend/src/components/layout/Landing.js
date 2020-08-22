@@ -24,11 +24,11 @@ class Landing extends Component {
             <div className="row">
               <div className="col s12 center-align">
                 <h4>
-                  <b>Host</b> and <b>Join</b> clubs for gamers to play together
+                  <b>Host</b> and <b>Join</b> clubs for gamers to game together
                 </h4>
 
                 <p className="flow-text grey-text text-darken-1">
-                  participate in indepth discussion of video games
+                  participate in indepth discussion over video games
                 </p>
 
 
@@ -43,7 +43,7 @@ class Landing extends Component {
                       borderRadius: "3px",
                       letterSpacing: "1.5px"
                     }}
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3">
+                    className="btn btn-large waves-effect waves-light hoverable black">
                     Register
                   </Link>
                 </div>
@@ -65,7 +65,7 @@ class Landing extends Component {
           
         </Slide>
         <Slide>
-          <h1>Another slide content</h1>
+          <h1>Page Under Construction</h1>
         </Slide>
       </FullPage>
  

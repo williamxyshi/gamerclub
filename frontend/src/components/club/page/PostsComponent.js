@@ -63,8 +63,7 @@ class PostsComponent extends Component {
     onCommentChangeHandler(e){
         this.state.postComment = e.target.value;
     }
-
-    
+  
   render() {
     var styles = {
         imageContainer: {
@@ -79,8 +78,9 @@ class PostsComponent extends Component {
     if(this.props.gamerClub.postscomments) {
         /**
          * this flips it so that it's in chronological order :) 
+         * 
          */
-        postsComments = this.props.gamerClub.postscomments.reverse()
+        postsComments = this.props.gamerClub.postscomments
     }
 
     var openText = "Show Comments"
@@ -93,7 +93,7 @@ class PostsComponent extends Component {
                         paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}>
 
                     <div style={{fontSize: 20, fontFamily:"monospace", marginBottom: -5}}>
-                        <b>{postsComments[index].post.posttitle}</b>
+                        <b>{postsComments[index].post.posttitle + postsComments[index].post.postid + index}</b>
                     </div>
 
                     <div style={{marginBottom: 10, fontSize: 10, marginLeft: 0}}>
@@ -108,7 +108,7 @@ class PostsComponent extends Component {
                     </div>
 
                     <Popup
-                        trigger={<button className="button"> Write a Comment </button>}
+                        trigger={<button className="button"> Write a Comment</button>}
                         modal
                         closeOnDocumentClick
                     >
@@ -119,8 +119,6 @@ class PostsComponent extends Component {
 
                         <button style={{marginTop: 10}} onClick={
                             (event) => {
-
-    
                                 this.state.currentClub = postsComments[index].post.clubid
                                 this.state.currentPost = postsComments[index].post.postid
 

@@ -54,12 +54,9 @@ class JoinClub extends Component {
         
         .then(res => {
 
-                console.log(res.data)
+                this.props.onGamerClubUpdate(res.data);
 
-            
-                // this.props.onGamerClubUpdate(res.data);
-
-                // this.props.history.push("/home")
+                this.props.history.push("/home")
             
                
             

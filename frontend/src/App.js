@@ -153,9 +153,9 @@ class App extends Component {
   }
 
   onGamerClubUpdate = newClub => {
-    console.log(newClub)
-    // this.state.gamerClub = newClub
-
+    if(newClub.postscomments){
+      newClub.postscomments.reverse()
+    }
     this.setState({
       gamerClub: newClub
     })
