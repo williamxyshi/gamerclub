@@ -50,8 +50,6 @@ class NewClub extends Component {
         this.onClickHandler = this.onClickHandler.bind(this);
         this.onChooseGameHandler = this.onChooseGameHandler.bind(this);
         this.onClubNameChangeHandler = this.onClubNameChangeHandler.bind(this);
-
-        console.log("user:" + this.props.user)
       }
 
       /**
@@ -91,9 +89,7 @@ class NewClub extends Component {
             adminemail: this.props.user.email,
             gameurl: this.state.posterurl,
             currentgame: this.state.chosenGame
-        }
-        console.log(clubData)
-        
+        }        
 
         axios.post('http://localhost:4000/games/createclub', clubData)
         
@@ -154,10 +150,8 @@ class NewClub extends Component {
                     serverResult: res.data
                 })
     
-    
-                console.log(this.state.serverResult)
-               
-            
+                   
+        
               } ).catch(err =>{
                 console.log(err)
               });

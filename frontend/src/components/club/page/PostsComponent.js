@@ -41,7 +41,6 @@ class PostsComponent extends Component {
             postid: this.state.currentPost,
             commentbody: this.state.postComment
         }
-        console.log(postData)
 
         axios.post('http://localhost:4000/games/addcomment', postData)
         

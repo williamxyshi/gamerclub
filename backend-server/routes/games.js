@@ -277,7 +277,6 @@ router.post("/toggledeadline", auth, async(req,res) => {
        
 
 
-        console.log(reached)
 
         if(reached == false){
             club.reachedDeadline.push({
@@ -709,7 +708,6 @@ router.get("/getgame", async (req, res) => {
         } 
         for(i = 0; i< maxLength; i++){
             var responsegamename = RAWGresponse.data.results[i].name
-            console.log(responsegamename)
             var url = ""
                 try{
 
@@ -748,7 +746,6 @@ router.get("/getgame", async (req, res) => {
             responseArr.push([responsegamename, url]
             );  
         }
-        console.log(responseArr)
         res.json(responseArr)
 
     } catch (e) {
@@ -798,7 +795,6 @@ router.post("/leaveclub", auth, async(req,res) => {
             if (currentM.email == user.email){
                 if(currentM.isadmin == true){
 
-                    console.log(currentM.isadmin)
                     return res.status(400).json({
                         msg: "Cannot Leave Your Own Club"
                     });
@@ -975,7 +971,6 @@ router.post("/joinclub", auth, async(req,res) => {
             posttype,
             dateposted
         })
-        console.log(post);
         post.save();
 
 
@@ -1039,7 +1034,6 @@ router.post("/createclub", auth, async (req, res) => {
             gameurl
         } = req.body;
 
-        console.log( clubname + id + adminemail + currentgame )
 
         let club = await Club.findOne({
             id

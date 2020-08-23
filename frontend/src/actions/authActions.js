@@ -37,11 +37,8 @@ export const loginUser = userData => dispatch => {
         setAuthToken(token);
 
       
-        console.log(token);
-
         //get user with token
         axios.get('http://localhost:4000/user/me').then(res => {
-            console.log(res);
 
             dispatch(setCurrentUser(res.data));
           

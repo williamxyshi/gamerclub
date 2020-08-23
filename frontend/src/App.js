@@ -64,7 +64,6 @@ class App extends Component {
 
       //get user from server with token 
       axios.get('http://localhost:4000/user/me').then(res => {
-              console.log(res);
 
               this.setState({
                 user: res.data
@@ -107,7 +106,6 @@ class App extends Component {
           setAuthToken(token);
   
         
-          console.log(token);
   
           //get user with token
           axios.get('http://localhost:4000/user/me').then(res => {
@@ -117,7 +115,6 @@ class App extends Component {
                 user: res.data
               })
             
-              console.log(this.state.user);
           
             } )
             .catch(err =>{
@@ -149,7 +146,6 @@ class App extends Component {
   };
 
   componentDidUpdate(){
-    console.log("update App")
   }
 
   onGamerClubUpdate = newClub => {

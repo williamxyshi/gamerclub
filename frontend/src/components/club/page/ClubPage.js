@@ -95,10 +95,8 @@ class ClubPage extends React.Component {
 
     if(!this.props.gamerClub.club.clubname){
 
-      console.log("no gamerr club")
       let id = localStorage.getItem( 'clubid' )
 
-      console.log(id)
 
 
       axios.post('http://localhost:4000/games/getclub', {

@@ -28,8 +28,6 @@ class JoinClub extends Component {
 
     handleOutput(e){
         this.state.clubid = e.target.value
-
-        console.log(this.state.clubid)
     }
 
 
@@ -41,9 +39,6 @@ class JoinClub extends Component {
             shouldReturn = true
         }
         if(shouldReturn)return;
-
-        console.log(this.state.clubid)
-
 
         const postdata = {
             id: this.state.clubid

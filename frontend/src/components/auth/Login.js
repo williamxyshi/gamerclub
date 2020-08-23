@@ -17,9 +17,7 @@ class Login extends Component {
 
   }
 componentWillReceiveProps(nextProps) {
-    console.log("ey")
     if (nextProps.user != {}) {
-      console.log("ey2")
       this.props.history.push("/home"); // push user to home when they login
     }
 
@@ -36,7 +34,6 @@ componentWillReceiveProps(nextProps) {
    */
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to home
-    console.log("ey")
     if (this.props.user != null) {
       this.props.history.push("/home");
     }

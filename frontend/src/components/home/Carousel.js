@@ -18,7 +18,6 @@ class Carousel extends Component {
     const options = {
       duration: 300,
       onCycleTo: () => {
-        console.log("New Slide");
       }
     };
     M.Carousel.init(this.Carousel, options);

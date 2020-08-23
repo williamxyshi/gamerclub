@@ -81,7 +81,6 @@ class AdminPage extends Component {
                 postdescription: this.state.postBody,
                 posttype: "discussion"
             }
-            console.log(postData)
     
             axios.post('http://localhost:4000/games/addpost', postData)
             
@@ -129,7 +128,6 @@ class AdminPage extends Component {
                 currentgame: this.state.chosenGame,
                 posterurl: this.state.posterurl
             }
-            console.log(postData)
     
             axios.post('http://localhost:4000/games/changegame', postData)
             
@@ -228,8 +226,6 @@ class AdminPage extends Component {
                     serverResult: res.data
                 })
     
-    
-                console.log(this.state.serverResult)
                
             
               } ).catch(err =>{
@@ -270,7 +266,6 @@ class AdminPage extends Component {
                 newdeadline: newDate,
                 deadlinedescription: this.state.newDescription
             }
-            console.log(postData)
     
             axios.post('http://localhost:4000/games/changedeadline', postData)
             
