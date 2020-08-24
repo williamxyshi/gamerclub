@@ -42,7 +42,7 @@ class PostsComponent extends Component {
             commentbody: this.state.postComment
         }
 
-        axios.post('http://localhost:4000/games/addcomment', postData)
+        axios.post('games/addcomment', postData)
         
         .then(res => {
             

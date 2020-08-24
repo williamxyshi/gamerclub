@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// import axios from 'axios';
+import axios from 'axios';
 
-// axios.defaults.baseURL = "http://localhost:4000/"
+axios.defaults.baseURL = "https://limitless-waters-10325.herokuapp.com/"
 
 ReactDOM.render(
   <React.StrictMode>

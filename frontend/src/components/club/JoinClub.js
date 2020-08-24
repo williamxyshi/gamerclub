@@ -45,7 +45,7 @@ class JoinClub extends Component {
         }
         
 
-        axios.post('http://localhost:4000/games/joinclub', postdata)
+        axios.post('games/joinclub', postdata)
         
         .then(res => {
 

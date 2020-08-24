@@ -63,7 +63,7 @@ class App extends Component {
       setAuthToken(token);
 
       //get user from server with token 
-      axios.get('http://localhost:4000/user/me').then(res => {
+      axios.get('user/me').then(res => {
 
               this.setState({
                 user: res.data
@@ -108,7 +108,7 @@ class App extends Component {
         
   
           //get user with token
-          axios.get('http://localhost:4000/user/me').then(res => {
+          axios.get('user/me').then(res => {
             
   
               this.setState({

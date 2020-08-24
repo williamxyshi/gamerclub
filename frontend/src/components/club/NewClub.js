@@ -91,7 +91,7 @@ class NewClub extends Component {
             currentgame: this.state.chosenGame
         }        
 
-        axios.post('http://localhost:4000/games/createclub', clubData)
+        axios.post('games/createclub', clubData)
         
         .then(res => {
             
@@ -144,7 +144,7 @@ class NewClub extends Component {
 
         if(this.timeout) clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-            axios.get('http://localhost:4000/games/getgame?gamename=' + text).then(res => {
+            axios.get('games/getgame?gamename=' + text).then(res => {
 
                 this.setState({
                     serverResult: res.data

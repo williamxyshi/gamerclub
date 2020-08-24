@@ -48,7 +48,7 @@ class ClubList extends Component {
     onClickHandler(index){
         console.log(index)
 
-        axios.post('http://localhost:4000/games/getclub', {
+        axios.post('games/getclub', {
             clubid: this.props.clublist.clublist[index].clubid
         })
         

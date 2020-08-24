@@ -99,7 +99,7 @@ class ClubPage extends React.Component {
 
 
 
-      axios.post('http://localhost:4000/games/getclub', {
+      axios.post('games/getclub', {
           clubid: id
       })
       
@@ -125,7 +125,7 @@ class ClubPage extends React.Component {
     })
 
 
-    axios.post('http://localhost:4000/games/toggledeadline', {
+    axios.post('games/toggledeadline', {
         clubid: this.props.gamerClub.club.id
       })
       

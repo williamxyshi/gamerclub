@@ -82,7 +82,7 @@ class AdminPage extends Component {
                 posttype: "discussion"
             }
     
-            axios.post('http://localhost:4000/games/addpost', postData)
+            axios.post('games/addpost', postData)
             
             .then(res => {
                 
@@ -129,7 +129,7 @@ class AdminPage extends Component {
                 posterurl: this.state.posterurl
             }
     
-            axios.post('http://localhost:4000/games/changegame', postData)
+            axios.post('games/changegame', postData)
             
             .then(res => {
                 
@@ -176,7 +176,7 @@ class AdminPage extends Component {
             let id = localStorage.getItem( 'clubid' )
     
     
-            axios.post('http://localhost:4000/games/getclub', {
+            axios.post('games/getclub', {
                 clubid: id
             })
             
@@ -220,13 +220,11 @@ class AdminPage extends Component {
 
         if(this.timeout) clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-            axios.get('http://localhost:4000/games/getgame?gamename=' + text).then(res => {
+            axios.get('games/getgame?gamename=' + text).then(res => {
 
                 this.setState({
                     serverResult: res.data
-                })
-    
-               
+                })               
             
               } ).catch(err =>{
                 console.log(err)
@@ -267,7 +265,7 @@ class AdminPage extends Component {
                 deadlinedescription: this.state.newDescription
             }
     
-            axios.post('http://localhost:4000/games/changedeadline', postData)
+            axios.post('games/changedeadline', postData)
             
             .then(res => {
                 
