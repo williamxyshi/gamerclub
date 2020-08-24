@@ -23,14 +23,13 @@ class Landing extends Component {
             <div style={{ height: "75vh" }} className="container valign-wrapper">
             <div className="row">
               <div className="col s12 center-align">
-                <h4>
-                  <b>Host</b> and <b>Join</b> clubs for gamers to game together
+                <h4 style={{}}>
+                  The best platform to <b>Create/Join</b> video game clubs
                 </h4>
 
-                <p className="flow-text grey-text text-darken-1">
-                  participate in indepth discussion over video games
-                </p>
-
+                {/* <p className="flow-text grey-text text-darken-1">
+                  Get started for free now
+                </p> */}
 
                 <br/>
 
@@ -65,7 +64,29 @@ class Landing extends Component {
           
         </Slide>
         <Slide>
-          <h1>Page Under Construction</h1>
+        <div style={{ height: "75vh" }} className="container valign-wrapper">
+            <div className="row">
+              <div className="col s12 center-align">
+                <h4>
+                  Gamer Club Features:
+                </h4>
+
+              
+
+
+                <div className="col s12">
+            
+                • Host video game clubs to easily organize discussion for video games <br></br>
+                • Join game clubs using a unique 5 digit code <br></br>
+                • Set checkpoint deadlines, and poll for completion rates <br></br>
+                • Create discussion posts, and comment on them <br></br>
+                • View currently most popular video games <br></br>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
         </Slide>
       </FullPage>
  

@@ -46,8 +46,6 @@ class ClubList extends Component {
        * link to specific club page
        */
     onClickHandler(index){
-        console.log(index)
-
         axios.post('games/getclub', {
             clubid: this.props.clublist.clublist[index].clubid
         })
