@@ -92,7 +92,7 @@ class PostsComponent extends Component {
                         paddingLeft: 10, paddingRight: 10, paddingBottom: 5, paddingTop: 5}}>
 
                     <div style={{fontSize: 20, fontFamily:"monospace", marginBottom: -5}}>
-                        <b>{postsComments[index].post.posttitle + postsComments[index].post.postid + index}</b>
+                        <b>{postsComments[index].post.posttitle}</b>
                     </div>
 
                     <div style={{marginBottom: 10, fontSize: 10, marginLeft: 0}}>
