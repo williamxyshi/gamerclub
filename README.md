@@ -1,7 +1,7 @@
 # Gamer Club
 https://gamerclub.app/
 
-Book clubs but for video games :)
+Book clubs but for video games
 
 backend built with node, express, mongodb/mongoose
 </br>
