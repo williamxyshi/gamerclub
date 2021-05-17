@@ -24,7 +24,7 @@ const db = require("./models");
 
 
 db.mongoose
-  .connect(`mongodb+srv://wazord:will@gamerclub.hodzs.mongodb.net/GamerClub?retryWrites=true&w=majority`, {
+  .connect(`MONGODB_ATLAS_ENV_URI`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
