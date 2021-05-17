@@ -15,47 +15,29 @@ import M from "materialize-css";
 class Home extends Component {
     constructor(props){
         super(props);
-
         this.state = {
             clublist: []
         }
-
-
         this.getClubList = this.getClubList.bind(this)
     }
 
     componentDidMount() {
         var elems = document.querySelectorAll('.carousel');
         var instances = M.Carousel.init(elems, {duration: 200});
-
         this.getClubList()
     }
 
     getClubList(){
-
         let postData = {}
-        axios.post('games/getclubsforhome', postData)
-            
-            .then(res => {
-                
+        axios.post('games/getclubsforhome', postData)   
+            .then(res => { 
                     this.setState({
                         clublist: res.data
                     })
-                
-                
                   } ).catch(err =>{
                     console.log(err)
                   });
-    
-
-
-
-
-
             }
-
-
-
 
 
 

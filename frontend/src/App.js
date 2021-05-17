@@ -68,13 +68,9 @@ class App extends Component {
               this.setState({
                 user: res.data
               })
-            
-          
             } ).catch(err =>{
               console.log(err.response.data)
             });
-
-
     }
 
   }
@@ -118,12 +114,12 @@ class App extends Component {
           
             } )
             .catch(err =>{
-              console.log("error" + err.response.data)
+              console.log(err.response.data)
             })
 
       })
       .catch(err =>
-        console.log("error"+ err.response.data)
+        console.log(err.response.data)
       );
   };
 

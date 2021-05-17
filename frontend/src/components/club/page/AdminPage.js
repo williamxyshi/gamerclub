@@ -182,10 +182,6 @@ class AdminPage extends Component {
             
             .then(res => {
                     this.props.onGamerClubUpdate(res.data)
-
-        
-        
-            
                 } ).catch(err =>{
                 console.log(err)
                 });
@@ -197,13 +193,10 @@ class AdminPage extends Component {
     }
 
     onChooseGameHandler(e){
-
         this.setState({
             chosenGame: this.state.serverResult[e][0],
             posterurl: this.state.serverResult[e][1]
         })
-
-
     }
 
         /**

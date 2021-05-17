@@ -52,8 +52,8 @@ router.post(
                 password
             });
 
-            // const salt = await bcrypt.genSalt(10);
-            // user.password = await bcrypt.hash(password, salt);
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(password, salt);
 
             user.password = password;
 
@@ -108,12 +108,8 @@ router.post(
             message: "User Does Not Exist"
           });
   
-        // const isMatch = await bcrypt.compare(password, user.password);
+         const isMatch = await bcrypt.compare(password, user.password);
 
-        /**
-         * I'm suspicious on this localecompare function, keep
-         * a close eye on it
-         */
         const isMatch = password.localeCompare(user.password)
         if (isMatch)
           return res.status(400).json({
@@ -152,8 +148,6 @@ router.post(
  * @description - Get LoggedIn User
  * @param - /user/me
  */
-
-
 router.get("/me", auth, async (req, res) => {
     try {
 

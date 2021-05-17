@@ -48,18 +48,11 @@ class JoinClub extends Component {
         axios.post('games/joinclub', postdata)
         
         .then(res => {
-
                 this.props.onGamerClubUpdate(res.data);
-
-                this.props.history.push("/home")
-            
-               
-            
+                this.props.history.push("/home")         
               } ).catch(error =>{
                 if (error.response) {
                     // Request made and server responded
-                    console.log(error.response.data);
-
                     if(error.response.data.msg){
                         let text = String(error.response.data.msg)
                         M.toast({html: text, classes: 'rounded'})
@@ -70,7 +63,7 @@ class JoinClub extends Component {
                     console.log(error.request);
                   } else {
                     // Something happened in setting up the request that triggered an Error
-                    console.log('Error', error.message);
+                    console.log(error.message);
                   }
               });
 

@@ -91,16 +91,10 @@ class NewClub extends Component {
             currentgame: this.state.chosenGame
         }        
 
-        axios.post('games/createclub', clubData)
-        
-        .then(res => {
-            
+        axios.post('games/createclub', clubData) 
+        .then(res => { 
                 this.props.onGamerClubUpdate(res.data);
-
                 this.props.history.push("/confirmclub")
-            
-               
-            
               } ).catch(err =>{
                 console.log(err)
               });
@@ -149,9 +143,6 @@ class NewClub extends Component {
                 this.setState({
                     serverResult: res.data
                 })
-    
-                   
-        
               } ).catch(err =>{
                 console.log(err)
               });

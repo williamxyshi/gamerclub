@@ -34,20 +34,13 @@ const client = igdb('18cd0fe5d2781aaa3c13611e304dc2cd');
  */
 router.post("/getclubsforhome", auth, async(req,res) => {
     try {
-
         const user = await User.findById(req.user.id);
-
         if(!user){
             return res.status(400).json({
                 msg: "Invalid User"
             });
-        }
-
-
-       
+        }   
         var clublist = []
-
-
         for(i = 0; i < user.joinedclubs.length; i++){
             let clubid = user.joinedclubs[i].clubid
             let club = await Club.findOne({
@@ -60,11 +53,8 @@ router.post("/getclubsforhome", auth, async(req,res) => {
                     posterurl: club.gameurl,
                     clubid: club.id
                 })
-            }
-
-           
+            }         
         }
-
         res.json({
             clublist
         })
@@ -83,23 +73,14 @@ router.post("/getclubsforhome", auth, async(req,res) => {
  */
 router.post("/getclub", auth, async(req,res) => {
     try {
-
         const user = await User.findById(req.user.id);
-
         if(!user){
             return res.status(400).json({
                 msg: "Invalid User"
             });
         }
-
-        const {
-            clubid,
-        } = req.body;
-
-        let club = await Club.findOne({
-            id: clubid
-        });
-
+        const { clubid, } = req.body;
+        let club = await Club.findOne({ id: clubid});
         if (!club) {
             return res.status(400).json({
                 msg: "Invalid Club ID"
@@ -111,7 +92,6 @@ router.post("/getclub", auth, async(req,res) => {
         })
 
         let postsBundle = [];
-
         for(i = 0; i < posts.length; i++){
             const currentpost = posts[i];
 
@@ -124,17 +104,12 @@ router.post("/getclub", auth, async(req,res) => {
                 comments: postcomments
             })
         }
-
-    
         res.json({
             club: club,
             postscomments: postsBundle
         })
-
     } catch (e) {
-
       res.send({ message: "Could Not Create Post"});
-
     }
 })
 
@@ -155,19 +130,13 @@ router.post("/addcomment", auth, async(req,res) => {
         let date = year + "-" + month + "-" + day
 
         const user = await User.findById(req.user.id);
-
-        if(!user){
-            return res.status(400).json({
-                msg: "Invalid User"
-            });
-        }
+        if(!user){ return res.status(400).json({ msg: "Invalid User" }); }
 
         const {
             clubid,
             postid,
             commentbody
         } = req.body;
-
         let club = await Club.findOne({
             id: clubid
         });
@@ -178,15 +147,9 @@ router.post("/addcomment", auth, async(req,res) => {
             });
         }
 
-        let post = await Post.findOne({
-            postid, clubid
-        })
+        let post = await Post.findOne({ postid, clubid })
 
-        if (!post) {
-            return res.status(400).json({
-                msg: "Invalid Post ID"
-            });
-        }
+        if (!post) { return res.status(400).json({ msg: "Invalid Post ID"  }); }
 
 
         var comments = await Comment.find({
@@ -248,20 +211,11 @@ router.post("/toggledeadline", auth, async(req,res) => {
 
         const user = await User.findById(req.user.id);
 
-        if(!user){
-            return res.status(400).json({
-                msg: "Invalid User"
-            });
-        }
+        if(!user){ return res.status(400).json({  msg: "Invalid User" });  }
 
-        const {
-            clubid,
+        const { clubid } = req.body;
 
-        } = req.body;
-
-        let club = await Club.findOne({
-            id: clubid
-        })
+        let club = await Club.findOne({ id: clubid  })
 
         var reached = false;
          
@@ -273,11 +227,6 @@ router.post("/toggledeadline", auth, async(req,res) => {
             }
         }
 
-
-       
-
-
-
         if(reached == false){
             club.reachedDeadline.push({
                 email: user.email,
@@ -287,43 +236,30 @@ router.post("/toggledeadline", auth, async(req,res) => {
             function removeuser(value){
                 return value.email != user.email
             }
-
             club.reachedDeadline = club.reachedDeadline.filter(removeuser)
         }
-
-
         await club.save()
 
 
- let posts = await Post.find({
-            clubid
-        })
-
+        let posts = await Post.find({  clubid })
         let postsBundle = [];
-
         for(i = 0; i < posts.length; i++){
             const currentpost = posts[i];
-
             let postcomments = await Comment.find({
                 clubid, postid: currentpost.postid
             })
-
             postsBundle.push({
                 post: currentpost,
                 comments: postcomments
             })
         }
-
-    
         res.json({
             club: club,
             postscomments: postsBundle
         })
 
     } catch (e) {
-
       res.send({ message: "Could Not Change Reached Deadline"});
-
     }
 })
 
@@ -335,27 +271,14 @@ router.post("/toggledeadline", auth, async(req,res) => {
  */
 router.post("/changedeadline", auth, async(req,res) => {
     try {
-
-
         const user = await User.findById(req.user.id);
-
-        if(!user){
-            return res.status(400).json({
-                msg: "Invalid User"
-            });
-        }
+        if(!user){ return res.status(400).json({ msg: "Invalid User" });}
 
         const {
             clubid,
             newdeadline,
             deadlinedescription,
         } = req.body;
-
-
-        let clubcheck = await Club.findOne({
-            id: clubid
-        })
-
 
         let club = await Club.findOneAndUpdate({
             id: clubid
@@ -368,13 +291,11 @@ router.post("/changedeadline", auth, async(req,res) => {
             new: true
         })
 
-
         let posts = await Post.find({
             clubid
         })
 
         let postsBundle = [];
-
         for(i = 0; i < posts.length; i++){
             const currentpost = posts[i];
 
@@ -387,8 +308,6 @@ router.post("/changedeadline", auth, async(req,res) => {
                 comments: postcomments
             })
         }
-
-    
         res.json({
             club: club,
             postscomments: postsBundle
@@ -508,8 +427,6 @@ router.post("/changegame", auth, async(req,res) => {
                 comments: postcomments
             })
         }
-
-    
         res.json({
             club: club,
             postscomments: postsBundle
@@ -730,16 +647,6 @@ router.get("/getgame", async (req, res) => {
                             }]
                             */
                         });
-
-               
-
-                
-
-
-                    // await wiki().page(responsegamename).then( page => page.mainImage() ).then(res=>{
-                    //     url = res;
-                    //     console.log(res)
-                    // });
                 } catch(e){
                     console.log("error retriving image" + e)
                 }
@@ -892,7 +799,6 @@ router.post("/joinclub", auth, async(req,res) => {
                 msg: "Invalid User"
             });
         }
-
 
         const {
             id
@@ -1109,7 +1015,6 @@ router.post("/createclub", auth, async (req, res) => {
             posttype,
             dateposted
         })
-
         await post.save()
 
 
@@ -1122,8 +1027,6 @@ router.post("/createclub", auth, async (req, res) => {
             startedplaying,
             members,
             gameurl,
-
-
             currentdeadline: null,
             deadlinedescription: null
         })
